@@ -1,0 +1,16 @@
+[
+{
+  "modid": "ringkydinks",
+  "name": "Ringky Dinks",
+  "description": "Combine a ring and an ability dink and get a ability ring.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["MattDahEpic"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
