@@ -25,14 +25,11 @@ public class RingkyDinks {
     public static final String MODID = "ringkydinks";
     public static final String NAME = "Ringky Dinks";
     public static final String VERSION = "@VERSION@";
-    public static final String DEPENDENCIES = "required-after:mdecore@[1.8.9-1.0,);";
+    public static final String DEPENDENCIES = "required-after:mdecore@[1.8.9-1.0,);required-after:Baubles;";
     public static final String UPDATE_URL = "https://raw.githubusercontent.com/MattDahEpic/Version/master/"+ MinecraftForge.MC_VERSION+"/"+MODID+".txt";
 
     public static final Logger log = LogManager.getLogger(MODID);
 
-    public static Item ring = new ItemRing();
-    public static Item dink = new ItemDink();
-    public static Item ringkydink = new ItemRingkyDink();
     public static CreativeTabs tab = new CreativeTabs(MODID) {
         @Override
         public Item getTabIconItem() {
@@ -43,6 +40,9 @@ public class RingkyDinks {
             return RDConstants.EnumDink.FLIGHT.id;
         }
     };
+    public static Item ring = new ItemRing();
+    public static Item dink = new ItemDink();
+    public static Item ringkydink = new ItemRingkyDink();
 
     @SidedProxy(clientSide = "com.mattdahepic.ringkydinks.proxy.ClientProxy",serverSide = "com.mattdahepic.ringkydinks.proxy.CommonProxy")
     private static CommonProxy proxy;
