@@ -19,6 +19,7 @@ public class ItemRingkyDink extends Item implements IBauble {
     public long lastUpdate = 0;
     public ItemRingkyDink () {
         this.setUnlocalizedName("ringkydink");
+        this.setMaxStackSize(1);
         this.setHasSubtypes(true);
         this.setMaxDamage(0);
         this.setCreativeTab(RingkyDinks.tab);

@@ -3,6 +3,8 @@ package com.mattdahepic.ringkydinks.dink;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 
 import java.util.List;
@@ -21,6 +23,9 @@ public class DinkAbilities {
             case FLIGHT:
                 player.capabilities.allowFlying = false;
                 player.sendPlayerAbilities();
+                break;
+            case WATERBREATHING:
+                player.removePotionEffect(Potion.waterBreathing.id);
                 break;
         }
     }
@@ -44,7 +49,7 @@ public class DinkAbilities {
                 break;
             case MAGNET: //thanks EnderIO
                 if (!player.isSneaking()) {
-                    List<EntityItem> inArea = player.worldObj.getEntitiesWithinAABB(EntityItem.class,new AxisAlignedBB(player.posX-16D,player.posY-4D,player.posZ-16D,player.posX+16D,player.posY+4D,player.posZ+16D));
+                    List<EntityItem> inArea = player.worldObj.getEntitiesWithinAABB(EntityItem.class,new AxisAlignedBB(player.posX-6D,player.posY-4D,player.posZ-6D,player.posX+6D,player.posY+4D,player.posZ+6D));
                     for (EntityItem i : inArea) {
                         double x = player.posX+0.5D-i.posX;
                         double y = player.posY+1D-i.posY;
@@ -60,6 +65,9 @@ public class DinkAbilities {
                         }
                     }
                 }
+                break;
+            case WATERBREATHING:
+                player.addPotionEffect(new PotionEffect(Potion.waterBreathing.id,160,0,true,true));
                 break;
         }
     }
