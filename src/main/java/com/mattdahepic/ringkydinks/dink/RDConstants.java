@@ -11,9 +11,10 @@ public class RDConstants {
     public enum EnumDink {
         TEMPLATE(0,"template",null),
         FLIGHT(1,"flight",DinkLevel.TIER3),
-        LAVAWALK(2,"lavawalk",DinkLevel.TIER2),
-        WATERWALK(3,"waterwalk",DinkLevel.TIER2),
-        ANTIPOTION(4,"antipotion",DinkLevel.TIER2);
+        LAVAWALK(2,"lavawalk",DinkLevel.TIER1),
+        WATERWALK(3,"waterwalk",DinkLevel.TIER1),
+        ANTIPOTION(4,"antipotion",DinkLevel.TIER2),
+        ANTIFIRE(5,"antifire",DinkLevel.TIER2);
 
         public final int id;
         public final String name;

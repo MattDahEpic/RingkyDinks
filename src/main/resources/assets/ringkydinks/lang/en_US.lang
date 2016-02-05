@@ -7,9 +7,11 @@ item.dink.flight.name=Flight Dink
 item.dink.lavawalk.name=Lava Walking Dink
 item.dink.waterwalk.name=Water Walking Dink
 item.dink.antipotion.name=Anti-Potion Effect Dink
+item.dink.antifire.name=Anti-Fire Dink
 
 #Ringkydinks
 item.ringkydink.flight.name=Flight RingkyDink
 item.ringkydink.lavawalk.name=Lava Walking RingkyDink
 item.ringkydink.waterwalk.name=Water Walking RingkyDink
 item.ringkydink.antipotion.name=Anti-Potion Effect RingkyDink
+item.ringkydink.antifire.name=Anti-Fire RingkyDink

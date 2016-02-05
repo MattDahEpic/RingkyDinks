@@ -1,6 +1,7 @@
 package com.mattdahepic.ringkydinks.dink;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 
 public class DinkAbilities {
     public static void enable (RDConstants.EnumDink dinkType, EntityPlayer player) {
@@ -9,10 +10,6 @@ public class DinkAbilities {
                 player.capabilities.allowFlying = true;
                 player.sendPlayerAbilities();
                 break;
-            case LAVAWALK:
-                break; //todo
-            case WATERWALK:
-                break; //todo
         }
     }
     public static void disable (RDConstants.EnumDink dinkType, EntityPlayer player) {
@@ -21,10 +18,6 @@ public class DinkAbilities {
                 player.capabilities.allowFlying = false;
                 player.sendPlayerAbilities();
                 break;
-            case LAVAWALK:
-                break; //todo
-            case WATERWALK:
-                break; //todo
         }
     }
     public static void tick (RDConstants.EnumDink dinkType, EntityPlayer player) {
@@ -33,9 +26,18 @@ public class DinkAbilities {
                 player.clearActivePotions();
                 break;
             case LAVAWALK:
-                break; //todo
+                if (player.worldObj.getBlockState(player.getPosition().down()).getBlock() == Blocks.lava || player.worldObj.getBlockState(player.getPosition().down()).getBlock() == Blocks.flowing_lava) {
+                    player.worldObj.setBlockState(player.getPosition().down(),Blocks.stone.getDefaultState());
+                }
+                break;
             case WATERWALK:
-                break; //todo
+                if (player.worldObj.getBlockState(player.getPosition().down()).getBlock() == Blocks.water || player.worldObj.getBlockState(player.getPosition().down()).getBlock() == Blocks.flowing_water) {
+                    player.worldObj.setBlockState(player.getPosition().down(),Blocks.ice.getDefaultState());
+                }
+                break;
+            case ANTIFIRE:
+                player.extinguish();
+                break;
         }
     }
 }

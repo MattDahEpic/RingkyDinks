@@ -2,20 +2,21 @@ package com.mattdahepic.ringkydinks.item;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
-
 import com.mattdahepic.ringkydinks.RingkyDinks;
 import com.mattdahepic.ringkydinks.dink.DinkAbilities;
 import com.mattdahepic.ringkydinks.dink.RDConstants;
-
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 import java.util.List;
 
 public class ItemRingkyDink extends Item implements IBauble {
+    public long lastUpdate = 0;
     public ItemRingkyDink () {
         this.setUnlocalizedName("ringkydink");
         this.setHasSubtypes(true);
@@ -32,8 +33,13 @@ public class ItemRingkyDink extends Item implements IBauble {
     public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems) {
         for (RDConstants.EnumDink d : RDConstants.EnumDink.values()) {
             if (d.id == 0) continue;
-            subItems.add(new ItemStack(RingkyDinks.dink, 1, d.id));
+            subItems.add(new ItemStack(RingkyDinks.ringkydink, 1, d.id));
         }
+    }
+    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+        RDConstants.EnumDink dink = RDConstants.getDinkByID(stack.getMetadata());
+        DinkAbilities.enable(dink, (EntityPlayer) entityIn);
+        DinkAbilities.tick(dink, (EntityPlayer) entityIn);
     }
 
     /* BAUBLES */
