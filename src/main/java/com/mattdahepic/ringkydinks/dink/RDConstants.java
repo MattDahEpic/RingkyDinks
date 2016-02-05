@@ -14,7 +14,8 @@ public class RDConstants {
         LAVAWALK(2,"lavawalk",DinkLevel.TIER1),
         WATERWALK(3,"waterwalk",DinkLevel.TIER1),
         ANTIPOTION(4,"antipotion",DinkLevel.TIER2),
-        ANTIFIRE(5,"antifire",DinkLevel.TIER2);
+        EXTINGUISHER(5,"extinguisher",DinkLevel.TIER2),
+        MAGNET(6,"magnet",DinkLevel.TIER2);
 
         public final int id;
         public final String name;

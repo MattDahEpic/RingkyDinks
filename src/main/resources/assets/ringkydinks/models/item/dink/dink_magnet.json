@@ -1,7 +1,7 @@
 {
   "parent": "ringkydinks:builtin/generated",
   "textures": {
-    "layer0": "ringkydinks:items/ringkydink/ringkydink_antifire"
+    "layer0": "ringkydinks:items/dink/dink_magnet"
   },
   "display": {
     "thirdperson": {

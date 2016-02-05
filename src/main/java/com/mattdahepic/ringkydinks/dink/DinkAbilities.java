@@ -1,7 +1,11 @@
 package com.mattdahepic.ringkydinks.dink;
 
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.AxisAlignedBB;
+
+import java.util.List;
 
 public class DinkAbilities {
     public static void enable (RDConstants.EnumDink dinkType, EntityPlayer player) {
@@ -35,8 +39,27 @@ public class DinkAbilities {
                     player.worldObj.setBlockState(player.getPosition().down(),Blocks.ice.getDefaultState());
                 }
                 break;
-            case ANTIFIRE:
+            case EXTINGUISHER:
                 player.extinguish();
+                break;
+            case MAGNET: //thanks EnderIO
+                if (!player.isSneaking()) {
+                    List<EntityItem> inArea = player.worldObj.getEntitiesWithinAABB(EntityItem.class,new AxisAlignedBB(player.posX-16D,player.posY-4D,player.posZ-16D,player.posX+16D,player.posY+4D,player.posZ+16D));
+                    for (EntityItem i : inArea) {
+                        double x = player.posX+0.5D-i.posX;
+                        double y = player.posY+1D-i.posY;
+                        double z = player.posZ+0.5D-i.posZ;
+                        double distance = x*x + y*y + z*z;
+                        if (distance < 1.25*1.25) {
+                            i.onCollideWithPlayer(player);
+                        } else {
+                            double distanceSpeed = (0.035*4)/distance;
+                            i.motionX += x*distanceSpeed;
+                            if (y > 0) {i.motionY = 0.12;} else {i.motionY += y*0.035;}
+                            i.motionZ += z*distanceSpeed;
+                        }
+                    }
+                }
                 break;
         }
     }
