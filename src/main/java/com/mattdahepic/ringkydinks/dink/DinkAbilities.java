@@ -14,8 +14,10 @@ public class DinkAbilities {
     public static void enable (RDConstants.EnumDink dinkType, EntityPlayer player) {
         switch (dinkType) {
             case FLIGHT:
-                player.capabilities.allowFlying = true;
-                player.sendPlayerAbilities();
+                if (!player.capabilities.allowFlying) {
+                    player.capabilities.allowFlying = true;
+                    player.sendPlayerAbilities();
+                }
                 break;
         }
     }
@@ -30,6 +32,9 @@ public class DinkAbilities {
                 break;
             case NIGHTVISION:
                 player.removePotionEffect(Potion.nightVision.id);
+                break;
+            case SATURATION:
+                player.removePotionEffect(Potion.saturation.id);
                 break;
         }
     }
@@ -75,6 +80,9 @@ public class DinkAbilities {
                 break;
             case NIGHTVISION:
                 player.addPotionEffect(new PotionEffect(Potion.nightVision.id,160,0,true,true));
+                break;
+            case SATURATION:
+                player.addPotionEffect(new PotionEffect(Potion.saturation.id,160,0,true,true));
                 break;
         }
     }

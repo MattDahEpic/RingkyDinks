@@ -30,6 +30,7 @@ public class CommonProxy {
         GameRegistry.addShapedRecipe(new ItemStack(RingkyDinks.dink,1,RDConstants.EnumDink.EXTINGUISHER.id),"wbw","btb","wbw",'w',Blocks.wool,'b',Items.water_bucket,'t',dinkTemplate);
         GameRegistry.addShapedRecipe(new ItemStack(RingkyDinks.dink,1,RDConstants.EnumDink.MAGNET.id),"ioi","oto","ioi",'i',Items.iron_ingot,'o',Blocks.obsidian,'t',dinkTemplate);
         GameRegistry.addShapedRecipe(new ItemStack(RingkyDinks.dink,1,RDConstants.EnumDink.WATERBREATHING.id),"bpb","ptp","bpb",'b',Items.bucket,'p',new ItemStack(Items.fish,1,3),'t',dinkTemplate);
+        GameRegistry.addShapedRecipe(new ItemStack(RingkyDinks.dink,1,RDConstants.EnumDink.SATURATION.id),"cfp","atb","mrs",'c',Items.cooked_chicken,'f',Items.cooked_fish,'p',Items.cooked_porkchop,'a',Items.apple,'b',Items.bread,'m',Items.cooked_mutton,'r',Items.cooked_rabbit,'s',Items.cooked_beef,'t',dinkTemplate);
         //ringkydinks
         for (RDConstants.EnumDink d : RDConstants.EnumDink.values()) {
             if (d.level == null) continue;

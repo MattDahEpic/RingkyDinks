@@ -14,7 +14,7 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.8.9-alpha2"
+version = "1.8.9-alpha3"
 group= "com.mattdahepic.ringkydinks"
 archivesBaseName = "ringkydinks"
 

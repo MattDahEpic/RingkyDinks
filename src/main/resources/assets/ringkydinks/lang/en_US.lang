@@ -11,6 +11,7 @@ item.dink.extinguisher.name=Extinguisher Dink
 item.dink.magnet.name=Magnet Dink
 item.dink.waterbreathing.name=Waterbreathing Dink
 item.dink.nightvision.name=Nightvision Dink
+item.dink.saturation.name=Saturation Dink
 
 #Ringkydinks
 item.ringkydink.flight.name=Flight RingkyDink
@@ -21,3 +22,4 @@ item.ringkydink.extinguisher.name=Extinguisher RingkyDink
 item.ringkydink.magnet.name=Magnet RingkyDink
 item.ringkydink.waterbreathing.name=Waterbreathing RingkyDink
 item.ringkydink.nightvision.name=Night Vision RingkyDink
+item.ringkydink.saturation.name=Saturation RingkyDink
