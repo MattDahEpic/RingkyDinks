@@ -16,7 +16,10 @@ public class RDConstants {
         ANTIPOTION(4,"antipotion",DinkLevel.TIER2),
         EXTINGUISHER(5,"extinguisher",DinkLevel.TIER2),
         MAGNET(6,"magnet",DinkLevel.TIER2),
-        WATERBREATHING(7,"waterbreathing",DinkLevel.TIER2);
+        WATERBREATHING(7,"waterbreathing",DinkLevel.TIER2),
+        NIGHTVISION(8,"nightvision",DinkLevel.TIER2);
+        //CHEST(9,"chest",DinkLevel.TIER1),
+        //ENDERCHEST(10,"enderchest",DinkLevel.TIER1);
 
         public final int id;
         public final String name;

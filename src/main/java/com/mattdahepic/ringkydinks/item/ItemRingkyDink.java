@@ -42,6 +42,9 @@ public class ItemRingkyDink extends Item implements IBauble {
         DinkAbilities.enable(dink, (EntityPlayer) entityIn);
         DinkAbilities.tick(dink, (EntityPlayer) entityIn);
     }
+    public ItemStack onItemRightClick (ItemStack stack, World world, EntityPlayer player) {
+        return DinkAbilities.onUse(RDConstants.getDinkByID(stack.getMetadata()),player,stack);
+    }
 
     /* BAUBLES */
     public BaubleType getBaubleType(ItemStack stack) {

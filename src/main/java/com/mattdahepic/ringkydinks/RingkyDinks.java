@@ -16,7 +16,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
@@ -26,6 +25,9 @@ import org.apache.logging.log4j.Logger;
 
 @Mod(modid = RingkyDinks.MODID,name = RingkyDinks.NAME,version = RingkyDinks.VERSION,dependencies = RingkyDinks.DEPENDENCIES)
 public class RingkyDinks {
+    @Mod.Instance(RingkyDinks.MODID)
+    public static RingkyDinks instance;
+
     public static final String MODID = "ringkydinks";
     public static final String NAME = "Ringky Dinks";
     public static final String VERSION = "@VERSION@";
@@ -48,8 +50,6 @@ public class RingkyDinks {
     public static Item dink = new ItemDink();
     public static Item ringkydink = new ItemRingkyDink();
 
-    private boolean loadComplete = false;
-
     @SidedProxy(clientSide = "com.mattdahepic.ringkydinks.proxy.ClientProxy",serverSide = "com.mattdahepic.ringkydinks.proxy.CommonProxy")
     private static CommonProxy proxy;
 
@@ -63,10 +63,6 @@ public class RingkyDinks {
     public void init (FMLInitializationEvent e) {
         proxy.registerRecipes();
         UpdateChecker.checkRemote(MODID, UPDATE_URL);
-    }
-    @Mod.EventHandler
-    public void loadComplete (FMLLoadCompleteEvent e) {
-        loadComplete = true;
     }
     @SubscribeEvent
     public void joinServer (PlayerEvent.PlayerLoggedInEvent e) {

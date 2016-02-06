@@ -3,6 +3,7 @@ package com.mattdahepic.ringkydinks.dink;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
@@ -26,6 +27,9 @@ public class DinkAbilities {
                 break;
             case WATERBREATHING:
                 player.removePotionEffect(Potion.waterBreathing.id);
+                break;
+            case NIGHTVISION:
+                player.removePotionEffect(Potion.nightVision.id);
                 break;
         }
     }
@@ -69,6 +73,20 @@ public class DinkAbilities {
             case WATERBREATHING:
                 player.addPotionEffect(new PotionEffect(Potion.waterBreathing.id,160,0,true,true));
                 break;
+            case NIGHTVISION:
+                player.addPotionEffect(new PotionEffect(Potion.nightVision.id,160,0,true,true));
+                break;
         }
+    }
+    public static ItemStack onUse (RDConstants.EnumDink dinkType, EntityPlayer player, ItemStack stack) {
+        /*switch (dinkType) {
+            case CHEST:
+                //player.openGui(RingkyDinks.instance,);
+                break; //todo
+            case ENDERCHEST:
+                //player.openGui(RingkyDinks.instance,);
+                break; //todo
+        }*/
+        return stack;
     }
 }

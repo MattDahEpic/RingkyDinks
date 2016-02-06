@@ -1,7 +1,7 @@
 {
   "parent": "ringkydinks:builtin/generated",
   "textures": {
-    "layer0": "ringkydinks:items/dink/dink_waterbreathing"
+    "layer0": "ringkydinks:items/dink/dink_nightvision"
   },
   "display": {
     "thirdperson": {
