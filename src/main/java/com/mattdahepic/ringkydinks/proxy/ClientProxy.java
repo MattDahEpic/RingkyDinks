@@ -3,6 +3,8 @@ package com.mattdahepic.ringkydinks.proxy;
 import com.mattdahepic.ringkydinks.RingkyDinks;
 import com.mattdahepic.ringkydinks.dink.DinkValues;
 import net.minecraft.client.renderer.ItemMeshDefinition;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
@@ -18,19 +20,20 @@ public class ClientProxy extends CommonProxy {
         ModelLoader.setCustomModelResourceLocation(RingkyDinks.ring, DinkValues.DinkLevel.TIER2.meta,new ModelResourceLocation("ringkydinks:ring/ring2","inventory"));
         ModelLoader.setCustomModelResourceLocation(RingkyDinks.ring, DinkValues.DinkLevel.TIER3.meta,new ModelResourceLocation("ringkydinks:ring/ring3","inventory"));
         for (DinkValues.EnumDink d : DinkValues.EnumDink.values()) {
-            ModelLoader.setCustomModelResourceLocation(RingkyDinks.dink,0,new ModelResourceLocation("ringkydinks:dink/dink_"+d.getType(),"inventory")); //dink model
-            if (d != DinkValues.EnumDink.TEMPLATE) ModelLoader.setCustomModelResourceLocation(RingkyDinks.ringkydink,0,new ModelResourceLocation("ringkydinks:ringkydink/ringkydink_"+d.getType(),"inventory")); //ringkydink model
+            ModelBakery.registerItemVariants(RingkyDinks.dink,new ModelResourceLocation("ringkydinks:dink/dink_"+d.getType(),"inventory")); //dink model
+            if (d != DinkValues.EnumDink.TEMPLATE) ModelBakery.registerItemVariants(RingkyDinks.ringkydink,new ModelResourceLocation("ringkydinks:ringkydink/ringkydink_"+d.getType(),"inventory")); //ringkydink model
         }
         ModelLoader.setCustomMeshDefinition(RingkyDinks.dink, new ItemMeshDefinition() {
             @Override
             public ModelResourceLocation getModelLocation(ItemStack stack) {
-                return new ModelResourceLocation("ringkydinks:dink/dink_"+DinkValues.getDinkType(stack).getType());
+                return new ModelResourceLocation("ringkydinks:dink/dink_"+DinkValues.getDinkType(stack).getType(),"inventory");
             }
         });
         ModelLoader.setCustomMeshDefinition(RingkyDinks.ringkydink, new ItemMeshDefinition() {
             @Override
             public ModelResourceLocation getModelLocation(ItemStack stack) {
-                return new ModelResourceLocation("ringkydinks:ringkydink/ringkydink_"+DinkValues.getDinkType(stack).getType());
+                DinkValues.EnumDink dink = DinkValues.getDinkType(stack);
+                return dink != DinkValues.EnumDink.TEMPLATE ?  new ModelResourceLocation("ringkydinks:ringkydink/ringkydink_"+DinkValues.getDinkType(stack).getType(),"inventory") : (ModelResourceLocation)TextureMap.LOCATION_MISSING_TEXTURE;
             }
         });
     }
