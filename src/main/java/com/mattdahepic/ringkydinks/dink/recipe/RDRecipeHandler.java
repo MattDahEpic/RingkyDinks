@@ -17,6 +17,6 @@ public class RDRecipeHandler {
     }
     public static IRecipe getRingDissassembly (DinkValues.EnumDink dinkType) {
         ItemStack ringdink = DinkValues.getRingkyDinkOfType(dinkType);
-        return new ShapelessRecipes(DinkValues.getDinkOfType(dinkType), Collections.singletonList(ringdink)); //todo: doesnt give back ring
+        return new ShapelessRecipes(DinkValues.getDinkOfType(dinkType), Collections.singletonList(ringdink)); //todo: doesnt give back ring or correct dink
     }
 }

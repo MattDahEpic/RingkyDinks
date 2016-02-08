@@ -11,9 +11,9 @@ import net.minecraft.util.AxisAlignedBB;
 import java.util.List;
 
 public class DinkAbilities {
-    public static void enable (String dinkType, EntityPlayer player) {
+    public static void enable (DinkValues.EnumDink dinkType, EntityPlayer player) {
         switch (dinkType) {
-            case DinkValues.EnumDink.FLIGHT.type:
+            case FLIGHT:
                 if (!player.capabilities.allowFlying) {
                     player.capabilities.allowFlying = true;
                     player.sendPlayerAbilities();
@@ -21,7 +21,7 @@ public class DinkAbilities {
                 break;
         }
     }
-    public static void disable (String dinkType, EntityPlayer player) {
+    public static void disable (DinkValues.EnumDink dinkType, EntityPlayer player) {
         switch (dinkType) {
             case FLIGHT:
                 player.capabilities.allowFlying = false;
@@ -38,7 +38,7 @@ public class DinkAbilities {
                 break;
         }
     }
-    public static void tick (String dinkType, EntityPlayer player) {
+    public static void tick (DinkValues.EnumDink dinkType, EntityPlayer player) {
         switch (dinkType) {
             case ANTIPOTION:
                 player.clearActivePotions();
@@ -86,7 +86,7 @@ public class DinkAbilities {
                 break;
         }
     }
-    public static ItemStack onUse (String dinkType, EntityPlayer player, ItemStack stack) {
+    public static ItemStack onUse (DinkValues.EnumDink dinkType, EntityPlayer player, ItemStack stack) {
         /*switch (dinkType) {
             case CHEST:
                 //player.openGui(RingkyDinks.instance,);

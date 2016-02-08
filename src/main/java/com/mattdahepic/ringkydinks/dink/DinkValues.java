@@ -7,20 +7,20 @@ import net.minecraftforge.common.util.Constants;
 
 public class DinkValues {
     public static final String TAG_DINK_TYPE = "dinktype";
-    public static String getDinkType (ItemStack stack) {
-        return (stack.hasTagCompound() && stack.getTagCompound().hasKey(TAG_DINK_TYPE, Constants.NBT.TAG_STRING)) ? stack.getTagCompound().getString(TAG_DINK_TYPE) : null;
+    public static EnumDink getDinkType (ItemStack stack) {
+        return (stack.hasTagCompound() && stack.getTagCompound().hasKey(TAG_DINK_TYPE, Constants.NBT.TAG_STRING)) ? EnumDink.valueOf(EnumDink.class,stack.getTagCompound().getString(TAG_DINK_TYPE).toUpperCase()) : null;
     }
     public static ItemStack getDinkOfType (EnumDink dink) {
         ItemStack ret = new ItemStack(RingkyDinks.dink,1,0);
         NBTTagCompound tag = new NBTTagCompound();
-        tag.setString(TAG_DINK_TYPE, dink.type);
+        tag.setString(TAG_DINK_TYPE, dink.getType());
         ret.setTagCompound(tag);
         return ret;
     }
     public static ItemStack getRingkyDinkOfType (EnumDink dink) {
         ItemStack ret = new ItemStack(RingkyDinks.ringkydink,1,0);
         NBTTagCompound tag = new NBTTagCompound();
-        tag.setString(TAG_DINK_TYPE,dink.type);
+        tag.setString(TAG_DINK_TYPE, dink.getType());
         ret.setTagCompound(tag);
         return ret;
     }
@@ -32,24 +32,29 @@ public class DinkValues {
     }
 
     public enum EnumDink {
-        TEMPLATE("template",null),
-        FLIGHT("flight",DinkLevel.TIER3),
-        LAVAWALK("lavawalk",DinkLevel.TIER1),
-        WATERWALK("waterwalk",DinkLevel.TIER1),
-        ANTIPOTION("antipotion",DinkLevel.TIER2),
-        EXTINGUISHER("extinguisher",DinkLevel.TIER2),
-        MAGNET("magnet",DinkLevel.TIER2),
-        WATERBREATHING("waterbreathing",DinkLevel.TIER2),
-        NIGHTVISION("nightvision",DinkLevel.TIER2),
-        SATURATION("saturation",DinkLevel.TIER2);
+        TEMPLATE(null),
+        FLIGHT(DinkLevel.TIER3),
+        LAVAWALK(DinkLevel.TIER1),
+        WATERWALK(DinkLevel.TIER1),
+        ANTIPOTION(DinkLevel.TIER2),
+        EXTINGUISHER(DinkLevel.TIER2),
+        MAGNET(DinkLevel.TIER2),
+        WATERBREATHING(DinkLevel.TIER2),
+        NIGHTVISION(DinkLevel.TIER2),
+        SATURATION(DinkLevel.TIER2);
         //CHEST(?,"chest",DinkLevel.TIER1),
         //ENDERCHEST(?,"enderchest",DinkLevel.TIER1);
 
-        public final String type;
         public final DinkLevel level;
-        EnumDink (String type,DinkLevel level) {
-            this.type = type;
+        EnumDink (DinkLevel level) {
             this.level = level;
+        }
+        public String getType () {
+            return this.name().toLowerCase();
+        }
+        @Override
+        public String toString () {
+            return this.getType();
         }
     }
     public enum DinkLevel {

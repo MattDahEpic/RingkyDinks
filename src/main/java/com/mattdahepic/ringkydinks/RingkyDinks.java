@@ -42,8 +42,8 @@ public class RingkyDinks {
             return ringkydink;
         }
         @Override
-        public int getIconItemDamage() {
-            return DinkValues.EnumDink.FLIGHT.id;
+        public ItemStack getIconItemStack() {
+            return DinkValues.getRingForDink(DinkValues.EnumDink.FLIGHT);
         }
     };
     public static Item ring = new ItemRing();

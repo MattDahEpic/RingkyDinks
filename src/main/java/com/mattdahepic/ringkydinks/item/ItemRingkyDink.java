@@ -24,9 +24,9 @@ public class ItemRingkyDink extends Item implements IBauble {
         this.setMaxDamage(0);
         this.setCreativeTab(RingkyDinks.tab);
     }
-    /*public ItemStack getContainerItem (ItemStack stack) { //todo: relates to #6?
-        return new ItemStack(RingkyDinks.ring,1, DinkValues.getDinkByID(stack.getMetadata()).level.meta);
-    }*/
+    public ItemStack getContainerItem (ItemStack stack) { //todo: relates to #6?
+        return DinkValues.getRingForDink(DinkValues.getDinkType(stack));
+    }
     public String getUnlocalizedName (ItemStack stack) {
         return "item.ringkydink."+ DinkValues.getDinkType(stack);
     }
@@ -38,7 +38,7 @@ public class ItemRingkyDink extends Item implements IBauble {
         }
     }
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-        String dink = DinkValues.getDinkType(stack);
+        DinkValues.EnumDink dink = DinkValues.getDinkType(stack);
         DinkAbilities.enable(dink, (EntityPlayer) entityIn);
         DinkAbilities.tick(dink, (EntityPlayer) entityIn);
     }
