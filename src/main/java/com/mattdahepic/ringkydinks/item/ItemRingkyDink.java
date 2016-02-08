@@ -24,7 +24,10 @@ public class ItemRingkyDink extends Item implements IBauble {
         this.setMaxDamage(0);
         this.setCreativeTab(RingkyDinks.tab);
     }
-    public ItemStack getContainerItem (ItemStack stack) { //todo: relates to #6?
+    public boolean hasContainerItem (ItemStack stack) {
+        return true;
+    }
+    public ItemStack getContainerItem (ItemStack stack) {
         return DinkValues.getRingForDink(DinkValues.getDinkType(stack));
     }
     public String getUnlocalizedName (ItemStack stack) {
