@@ -2,7 +2,7 @@ package com.mattdahepic.ringkydinks;
 
 import com.mattdahepic.mdecore.update.UpdateChecker;
 import com.mattdahepic.ringkydinks.dink.DinkAbilities;
-import com.mattdahepic.ringkydinks.dink.RDConstants;
+import com.mattdahepic.ringkydinks.dink.DinkValues;
 import com.mattdahepic.ringkydinks.item.ItemDink;
 import com.mattdahepic.ringkydinks.item.ItemRing;
 import com.mattdahepic.ringkydinks.item.ItemRingkyDink;
@@ -43,7 +43,7 @@ public class RingkyDinks {
         }
         @Override
         public int getIconItemDamage() {
-            return RDConstants.EnumDink.FLIGHT.id;
+            return DinkValues.EnumDink.FLIGHT.id;
         }
     };
     public static Item ring = new ItemRing();
@@ -80,7 +80,7 @@ public class RingkyDinks {
             }
             p.getEntityData().setInteger("ringCount", rings);
             if (rings < prevRings) {
-                for (RDConstants.EnumDink d : RDConstants.EnumDink.values()) {
+                for (DinkValues.EnumDink d : DinkValues.EnumDink.values()) {
                     DinkAbilities.disable(d, p);
                 }
             }

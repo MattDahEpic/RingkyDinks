@@ -11,9 +11,9 @@ import net.minecraft.util.AxisAlignedBB;
 import java.util.List;
 
 public class DinkAbilities {
-    public static void enable (RDConstants.EnumDink dinkType, EntityPlayer player) {
+    public static void enable (String dinkType, EntityPlayer player) {
         switch (dinkType) {
-            case FLIGHT:
+            case DinkValues.EnumDink.FLIGHT.type:
                 if (!player.capabilities.allowFlying) {
                     player.capabilities.allowFlying = true;
                     player.sendPlayerAbilities();
@@ -21,7 +21,7 @@ public class DinkAbilities {
                 break;
         }
     }
-    public static void disable (RDConstants.EnumDink dinkType, EntityPlayer player) {
+    public static void disable (String dinkType, EntityPlayer player) {
         switch (dinkType) {
             case FLIGHT:
                 player.capabilities.allowFlying = false;
@@ -38,7 +38,7 @@ public class DinkAbilities {
                 break;
         }
     }
-    public static void tick (RDConstants.EnumDink dinkType, EntityPlayer player) {
+    public static void tick (String dinkType, EntityPlayer player) {
         switch (dinkType) {
             case ANTIPOTION:
                 player.clearActivePotions();
@@ -57,7 +57,7 @@ public class DinkAbilities {
                 player.extinguish();
                 break;
             case MAGNET: //thanks EnderIO
-                if (!player.isSneaking()) {
+                if (!player.isSneaking() && !player.isSpectator()) {
                     List<EntityItem> inArea = player.worldObj.getEntitiesWithinAABB(EntityItem.class,new AxisAlignedBB(player.posX-6D,player.posY-4D,player.posZ-6D,player.posX+6D,player.posY+4D,player.posZ+6D));
                     for (EntityItem i : inArea) {
                         double x = player.posX+0.5D-i.posX;
@@ -86,7 +86,7 @@ public class DinkAbilities {
                 break;
         }
     }
-    public static ItemStack onUse (RDConstants.EnumDink dinkType, EntityPlayer player, ItemStack stack) {
+    public static ItemStack onUse (String dinkType, EntityPlayer player, ItemStack stack) {
         /*switch (dinkType) {
             case CHEST:
                 //player.openGui(RingkyDinks.instance,);

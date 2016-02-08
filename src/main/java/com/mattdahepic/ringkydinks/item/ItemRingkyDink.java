@@ -4,7 +4,7 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import com.mattdahepic.ringkydinks.RingkyDinks;
 import com.mattdahepic.ringkydinks.dink.DinkAbilities;
-import com.mattdahepic.ringkydinks.dink.RDConstants;
+import com.mattdahepic.ringkydinks.dink.DinkValues;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -24,26 +24,26 @@ public class ItemRingkyDink extends Item implements IBauble {
         this.setMaxDamage(0);
         this.setCreativeTab(RingkyDinks.tab);
     }
-    public ItemStack getContainerItem (ItemStack stack) {
-        return new ItemStack(RingkyDinks.ring,1,RDConstants.getDinkByID(stack.getMetadata()).level.meta);
-    }
+    /*public ItemStack getContainerItem (ItemStack stack) { //todo: relates to #6?
+        return new ItemStack(RingkyDinks.ring,1, DinkValues.getDinkByID(stack.getMetadata()).level.meta);
+    }*/
     public String getUnlocalizedName (ItemStack stack) {
-        return "item.ringkydink."+RDConstants.getDinkByID(stack.getMetadata()).name;
+        return "item.ringkydink."+ DinkValues.getDinkType(stack);
     }
     @Override
     public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems) {
-        for (RDConstants.EnumDink d : RDConstants.EnumDink.values()) {
-            if (d.id == 0) continue;
-            subItems.add(new ItemStack(RingkyDinks.ringkydink, 1, d.id));
+        for (DinkValues.EnumDink d : DinkValues.EnumDink.values()) {
+            if (d == DinkValues.EnumDink.TEMPLATE) continue;
+            subItems.add(DinkValues.getRingkyDinkOfType(d));
         }
     }
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-        RDConstants.EnumDink dink = RDConstants.getDinkByID(stack.getMetadata());
+        String dink = DinkValues.getDinkType(stack);
         DinkAbilities.enable(dink, (EntityPlayer) entityIn);
         DinkAbilities.tick(dink, (EntityPlayer) entityIn);
     }
     public ItemStack onItemRightClick (ItemStack stack, World world, EntityPlayer player) {
-        return DinkAbilities.onUse(RDConstants.getDinkByID(stack.getMetadata()),player,stack);
+        return DinkAbilities.onUse(DinkValues.getDinkType(stack),player,stack);
     }
 
     /* BAUBLES */
@@ -51,13 +51,13 @@ public class ItemRingkyDink extends Item implements IBauble {
         return BaubleType.RING;
     }
     public void onWornTick(ItemStack stack, EntityLivingBase player) {
-        DinkAbilities.tick(RDConstants.getDinkByID(stack.getMetadata()),(EntityPlayer)player);
+        DinkAbilities.tick(DinkValues.getDinkType(stack),(EntityPlayer)player);
     }
     public void onEquipped(ItemStack stack, EntityLivingBase player) {
-        DinkAbilities.enable(RDConstants.getDinkByID(stack.getMetadata()),(EntityPlayer)player);
+        DinkAbilities.enable(DinkValues.getDinkType(stack),(EntityPlayer)player);
     }
     public void onUnequipped(ItemStack stack, EntityLivingBase player) {
-        DinkAbilities.disable(RDConstants.getDinkByID(stack.getMetadata()),(EntityPlayer)player);
+        DinkAbilities.disable(DinkValues.getDinkType(stack),(EntityPlayer)player);
     }
     public boolean canEquip(ItemStack stack, EntityLivingBase player) {
         return true;

@@ -1,8 +1,7 @@
 package com.mattdahepic.ringkydinks.item;
 
-import com.mattdahepic.ringkydinks.dink.RDConstants;
 import com.mattdahepic.ringkydinks.RingkyDinks;
-
+import com.mattdahepic.ringkydinks.dink.DinkValues;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,12 +16,12 @@ public class ItemDink extends Item {
         this.setCreativeTab(RingkyDinks.tab);
     }
     public String getUnlocalizedName(ItemStack stack) {
-        return "item.dink."+RDConstants.getDinkByID(stack.getMetadata()).name;
+        return "item.dink."+ DinkValues.getDinkType(stack);
     }
     @Override
     public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems) {
-        for (RDConstants.EnumDink d : RDConstants.EnumDink.values()) {
-            subItems.add(new ItemStack(RingkyDinks.dink,1,d.id));
+        for (DinkValues.EnumDink d : DinkValues.EnumDink.values()) {
+            subItems.add(DinkValues.getDinkOfType(d));
         }
     }
 }
