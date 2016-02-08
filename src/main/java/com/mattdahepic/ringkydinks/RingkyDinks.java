@@ -67,6 +67,23 @@ public class RingkyDinks {
     @SubscribeEvent
     public void joinServer (PlayerEvent.PlayerLoggedInEvent e) {
         UpdateChecker.printMessageToPlayer(MODID, e.player);
+        //temporary dink converter. TODO: remove
+        for (ItemStack i : e.player.inventory.mainInventory) {
+            if (i.getItem() instanceof ItemDink) {
+                for (DinkValues.EnumDink d : DinkValues.EnumDink.values()) {
+                    if (d.ordinal() == i.getMetadata()) {
+                        i = DinkValues.getDinkOfType(d);
+                    }
+                }
+            }
+            if (i.getItem() instanceof ItemRingkyDink) {
+                for (DinkValues.EnumDink d : DinkValues.EnumDink.values()) {
+                    if (d.ordinal() == i.getMetadata()) {
+                        i = DinkValues.getDinkOfType(d);
+                    }
+                }
+            }
+        }
     }
     @SubscribeEvent
     public void tick (TickEvent.WorldTickEvent e) {
