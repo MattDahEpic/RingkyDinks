@@ -41,9 +41,12 @@ public class DinkValues {
         MAGNET(DinkLevel.TIER2),
         WATERBREATHING(DinkLevel.TIER2),
         NIGHTVISION(DinkLevel.TIER2),
-        SATURATION(DinkLevel.TIER2);
-        //CHEST(?,"chest",DinkLevel.TIER1),
-        //ENDERCHEST(?,"enderchest",DinkLevel.TIER1);
+        SATURATION(DinkLevel.TIER2),
+        SPEED(DinkLevel.TIER2);
+        //CHEST(DinkLevel.TIER1),
+        //ENDERCHEST(DinkLevel.TIER1),
+        //CRAFTINGTABLE(DinkLevel.TIER1),
+        //MOBDERPEARL(DinkLevel.TIER2); //like golden lasso
 
         public final DinkLevel level;
         EnumDink (DinkLevel level) {

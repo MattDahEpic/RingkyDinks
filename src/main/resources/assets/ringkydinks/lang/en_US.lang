@@ -12,6 +12,11 @@ item.dink.magnet.name=Magnet Dink
 item.dink.waterbreathing.name=Waterbreathing Dink
 item.dink.nightvision.name=Nightvision Dink
 item.dink.saturation.name=Saturation Dink
+item.dink.speed.name=Speed Dink
+item.dink.chest.name=Chest Dink
+item.dink.enderchest.name=Enderchest Dink
+item.dink.craftingtable.name=Crafting Table Dink
+item.dink.mobderpearl.name=Mobderpearl Dink
 
 #Ringkydinks
 item.ringkydink.flight.name=Flight RingkyDink
@@ -23,3 +28,8 @@ item.ringkydink.magnet.name=Magnet RingkyDink
 item.ringkydink.waterbreathing.name=Waterbreathing RingkyDink
 item.ringkydink.nightvision.name=Night Vision RingkyDink
 item.ringkydink.saturation.name=Saturation RingkyDink
+item.ringkydink.speed.name=Speed RingkyDink
+item.ringkydink.chest.name=Chest RingkyDink
+item.ringkydink.enderchest.name=Enderchest RingkyDink
+item.ringkydink.craftingtable.name=Crafting Table RingkyDink
+item.ringkydink.mobderpearl.name=Mobderpearl RingkyDink

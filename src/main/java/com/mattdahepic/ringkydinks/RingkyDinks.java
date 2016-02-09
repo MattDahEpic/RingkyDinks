@@ -20,8 +20,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 @Mod(modid = RingkyDinks.MODID,name = RingkyDinks.NAME,version = RingkyDinks.VERSION,dependencies = RingkyDinks.DEPENDENCIES)
 public class RingkyDinks {
@@ -33,8 +31,6 @@ public class RingkyDinks {
     public static final String VERSION = "@VERSION@";
     public static final String DEPENDENCIES = "required-after:mdecore@[1.8.9-1.0,);required-after:Baubles;";
     public static final String UPDATE_URL = "https://raw.githubusercontent.com/MattDahEpic/Version/master/"+ MinecraftForge.MC_VERSION+"/"+MODID+".txt";
-
-    public static final Logger log = LogManager.getLogger(MODID);
 
     public static CreativeTabs tab = new CreativeTabs(MODID) {
         @Override
@@ -74,7 +70,7 @@ public class RingkyDinks {
             int prevRings = p.getEntityData().getInteger("ringCount");
             int rings = 0;
             for (ItemStack s : p.inventory.mainInventory) {
-                if (s != null && s.getItem() instanceof ItemRingkyDink) {
+                if (s != null && s.getItem() instanceof ItemRingkyDink) { //get total ring count
                     rings++;
                 }
             }
