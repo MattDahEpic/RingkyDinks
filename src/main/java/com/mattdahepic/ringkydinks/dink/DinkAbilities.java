@@ -97,7 +97,7 @@ public class DinkAbilities {
                     player.addPotionEffect(new PotionEffect(Potion.saturation.id, 160, 0, true, true));
                     break;
                 case SPEED:
-                    player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 160, 0, true, true));
+                    player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 160, 2, true, true));
                     break;
             }
         } else {
@@ -116,7 +116,7 @@ public class DinkAbilities {
         return stack;
     }
     private static boolean consumeItems (DinkValues.EnumDink dinkType, EntityPlayer player) {
-        if (RDConfig.consumeItems && player.worldObj.getWorldTime() % RDConfig.consumeInterval == 0) {
+        if (RDConfig.consumeItems && player.worldObj.getTotalWorldTime() % RDConfig.consumeInterval == 0) {
             boolean canUseDink = false;
             for (ItemStack i : player.inventory.mainInventory) {
                 if (i != null) {

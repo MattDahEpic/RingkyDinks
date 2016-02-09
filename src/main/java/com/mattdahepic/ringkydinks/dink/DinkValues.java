@@ -55,8 +55,7 @@ public class DinkValues {
         public String getType () {
             return this.name().toLowerCase();
         }
-        @Override
-        public String toString () {
+        @Override public String toString () {
             return this.getType();
         }
     }
