@@ -115,7 +115,7 @@ public class DinkAbilities {
             default:
                 return false;
         }
-        return ItemHelper.isSameIgnoreStackSize(compare, ItemHelper.getItemFromName(fullName.substring(0, fullName.indexOf('@')-1), Integer.parseInt(fullName.substring('@'))));
+        return ItemHelper.isSameIgnoreStackSize(compare, ItemHelper.getItemFromName(fullName.substring(0, fullName.indexOf('@')-1), Integer.parseInt(fullName.substring(fullName.indexOf('@')+1))));
     }
     private static int getConsumeAmountForDink (DinkValues.EnumDink dink) {
         switch (dink) {
