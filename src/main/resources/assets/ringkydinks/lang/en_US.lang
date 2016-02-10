@@ -1,4 +1,5 @@
 itemGroup.ringkydinks=Ringky Dinks
+ringkydink.string.abilities=Abilities:
 item.ring.name=Ring
 item.dink.template.name=Dink Template
 
@@ -33,3 +34,16 @@ item.ringkydink.chest.name=Chest RingkyDink
 item.ringkydink.enderchest.name=Enderchest RingkyDink
 item.ringkydink.craftingtable.name=Crafting Table RingkyDink
 item.ringkydink.mobderpearl.name=Mobderpearl RingkyDink
+
+#Nice Names
+ringkydink.name.template=Template
+ringkydink.name.flight=Flight
+ringkydink.name.lavawalk=Lava Walking
+ringkydink.name.waterwalk=Water Walking
+ringkydink.name.antipotion=Anti-Potion
+ringkydink.name.extinguisher=Extinguisher
+ringkydink.name.magnet=Magnet
+ringkydink.name.waterbreathing=Waterbreathing
+ringkydink.name.nightvision=Night Vision
+ringkydink.name.saturation=Saturation
+ringkydink.name.speed=Speed

@@ -40,10 +40,18 @@ public class ItemRingkyDink extends Item implements IBauble {
             subItems.add(DinkValues.getRingkyDinkOfType(d));
         }
     }
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
+        tooltip.add(DinkValues.getEnabled(stack) ? "Enabled" : "Disabled");
+    }
+    @Override
+    public boolean hasEffect(ItemStack stack) {
+        return DinkValues.getEnabled(stack);
+    }
+
+    /* DINK ABILITIES */
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-        DinkValues.EnumDink dink = DinkValues.getDinkType(stack);
-        DinkAbilities.enable(dink, (EntityPlayer) entityIn);
-        DinkAbilities.tick(dink, (EntityPlayer) entityIn);
+        DinkAbilities.tick(DinkValues.getDinkType(stack),(EntityPlayer)entityIn,stack);
     }
     public ItemStack onItemRightClick (ItemStack stack, World world, EntityPlayer player) {
         return DinkAbilities.onUse(DinkValues.getDinkType(stack),player,stack);
@@ -54,14 +62,10 @@ public class ItemRingkyDink extends Item implements IBauble {
         return BaubleType.RING;
     }
     public void onWornTick(ItemStack stack, EntityLivingBase player) {
-        DinkAbilities.tick(DinkValues.getDinkType(stack),(EntityPlayer)player);
+        DinkAbilities.tick(DinkValues.getDinkType(stack),(EntityPlayer)player,stack);
     }
-    public void onEquipped(ItemStack stack, EntityLivingBase player) {
-        DinkAbilities.enable(DinkValues.getDinkType(stack),(EntityPlayer)player);
-    }
-    public void onUnequipped(ItemStack stack, EntityLivingBase player) {
-        DinkAbilities.disable(DinkValues.getDinkType(stack),(EntityPlayer)player);
-    }
+    public void onEquipped(ItemStack stack, EntityLivingBase player) {}
+    public void onUnequipped(ItemStack stack, EntityLivingBase player) {}
     public boolean canEquip(ItemStack stack, EntityLivingBase player) {
         return true;
     }

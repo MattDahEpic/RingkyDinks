@@ -6,7 +6,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.Constants;
 
 public class DinkValues {
-    public static final String TAG_DINK_TYPE = "dinktype";
+    public static final String NICE_NAME_TRANSLATION_KEY_PREFIX = "ringkydink.name.";
+
+    private static final String TAG_DINK_TYPE = "dinktype"; //todo: move to be dink.type
+    private static final String TAG_DINK_ENABLED = "dinkenabled"; //todo: change to dink.enabled
     public static EnumDink getDinkType (ItemStack stack) {
         return (stack.hasTagCompound() && stack.getTagCompound().hasKey(TAG_DINK_TYPE, Constants.NBT.TAG_STRING)) ? EnumDink.valueOf(EnumDink.class,stack.getTagCompound().getString(TAG_DINK_TYPE).toUpperCase()) : null;
     }
@@ -31,25 +34,36 @@ public class DinkValues {
         return getRingOfLevel(dink.level);
     }
 
+    public static boolean getEnabled (ItemStack stk) {
+        return stk.getTagCompound().getBoolean(TAG_DINK_ENABLED);
+    }
+    public static void setEnabled (ItemStack stk, boolean enable) {
+        stk.getTagCompound().setBoolean(TAG_DINK_ENABLED,enable);
+    }
+
     public enum EnumDink {
-        TEMPLATE(null),
-        FLIGHT(DinkLevel.TIER3),
-        LAVAWALK(DinkLevel.TIER1),
-        WATERWALK(DinkLevel.TIER1),
-        ANTIPOTION(DinkLevel.TIER2),
-        EXTINGUISHER(DinkLevel.TIER2),
-        MAGNET(DinkLevel.TIER2),
-        WATERBREATHING(DinkLevel.TIER2),
-        NIGHTVISION(DinkLevel.TIER2),
-        SATURATION(DinkLevel.TIER2),
-        SPEED(DinkLevel.TIER2);
-        //CHEST(DinkLevel.TIER1),
+        TEMPLATE(false,false,null),
+        FLIGHT(false,true,DinkLevel.TIER3),
+        LAVAWALK(false,false,DinkLevel.TIER1),
+        WATERWALK(false,false,DinkLevel.TIER1),
+        ANTIPOTION(false,true,DinkLevel.TIER2),
+        EXTINGUISHER(false,true,DinkLevel.TIER2),
+        MAGNET(false,true,DinkLevel.TIER2),
+        WATERBREATHING(false,true,DinkLevel.TIER2),
+        NIGHTVISION(false,true,DinkLevel.TIER2),
+        SATURATION(false,true,DinkLevel.TIER2),
+        SPEED(false,true,DinkLevel.TIER2);
+        //CHEST(true,false,DinkLevel.TIER1),
         //ENDERCHEST(DinkLevel.TIER1),
         //CRAFTINGTABLE(DinkLevel.TIER1),
         //MOBDERPEARL(DinkLevel.TIER2); //like golden lasso
 
+        public final boolean hasUseAbility;
+        public final boolean constantItemConsumption;
         public final DinkLevel level;
-        EnumDink (DinkLevel level) {
+        EnumDink (boolean useAbility, boolean constantItemConsumption, DinkLevel level) {
+            this.constantItemConsumption = constantItemConsumption;
+            this.hasUseAbility = useAbility;
             this.level = level;
         }
         public String getType () {
