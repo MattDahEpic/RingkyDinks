@@ -39,7 +39,7 @@ public class RDConfig extends ConfigSyncable {
     //TODO: CHEST
     //TODO: ENDERCHEST
     //TODO: CRAFTINGTABLE
-    @Config(CAT_CONSUMEITEMS) @Comment({"What item should the mobderpearl consume?"}) public static String mobderpearlConsumeItem = "minecraft_ender_pearl@0";
+    @Config(CAT_CONSUMEITEMS) @Comment({"What item should the mobderpearl consume?"}) public static String mobderpearlConsumeItem = "minecraft:ender_pearl@0";
 
     private static ConfigSyncable INSTANCE;
     public static ConfigSyncable instance(String configName) {

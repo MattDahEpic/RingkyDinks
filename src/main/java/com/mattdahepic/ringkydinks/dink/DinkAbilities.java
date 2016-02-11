@@ -61,7 +61,7 @@ public class DinkAbilities {
         private static final String TAG_MOBDERPREAL_MOB_NAME = "dink.mobderpearl.mob.name";
         private static final String TAG_MOBDERPEARL_MOB = "dink.mobderpearl.mob";
         public static boolean captureMob (EntityPlayer player, ItemStack stack, EntityLivingBase target) {
-            if (!getHasMob(stack) && target instanceof EntityLiving) { //is empty and an actual living thing
+            if (!getHasMob(stack) && target instanceof EntityLiving && !player.worldObj.isRemote) { //is empty and an actual living thing and you're on the server
                 if (((EntityLiving)target).getAttackTarget() != null) return false; //can't be targeting anything
                 if (target instanceof IBossDisplayData) return false; //can't be a boss
                 if (((EntityLiving)target).getMaxHealth() > player.getMaxHealth()) return false; //can't be stronger than the player
@@ -71,12 +71,13 @@ public class DinkAbilities {
                 stack.getTagCompound().setTag(TAG_MOBDERPEARL_MOB,mob);
                 stack.getTagCompound().setString(TAG_MOBDERPREAL_MOB_NAME,target.getName());
                 target.setDead();
+                player.inventory.markDirty();
                 return true;
             }
             return false;
         }
         public static boolean releaseMob (EntityPlayer player, ItemStack stack, BlockPos blockClicked, EnumFacing sideClicked) {
-            if (getHasMob(stack)) { //has mob to release
+            if (getHasMob(stack)  && !player.worldObj.isRemote) { //has mob to release and is on server
                 BlockPos releasePos = blockClicked.offset(sideClicked);
                 EntityLiving mob = (EntityLiving)EntityList.createEntityFromNBT(stack.getTagCompound().getCompoundTag(TAG_MOBDERPEARL_MOB),player.worldObj);
                 mob.setPosition(releasePos.getX(), releasePos.getY(), releasePos.getZ());

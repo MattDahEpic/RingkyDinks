@@ -63,19 +63,23 @@ public class ItemRingkyDink extends Item implements IBauble {
     }
 
     /* DINK ABILITIES */
+    @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
         DinkAbilities.tick(DinkValues.getDinkType(stack),(EntityPlayer)entityIn,stack);
     }
+    @Override
     public ItemStack onItemRightClick (ItemStack stack, World world, EntityPlayer player) {
         return DinkAbilities.onUse(DinkValues.getDinkType(stack),player,stack);
     }
-    public boolean onInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase target) {
+    @Override
+    public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase target) {
         if (DinkValues.getDinkType(stack) == DinkValues.EnumDink.MOBDERPEARL && DinkAbilities.ItemConsume.doesDinkHaveItemsNeededToFunction(DinkValues.EnumDink.MOBDERPEARL,player,false)) {
             return DinkAbilities.Mobderpearl.captureMob(player, stack, target);
         }
         return false;
     }
-    public boolean onBlockClick(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
+    @Override
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
         return DinkValues.getDinkType(stack) == DinkValues.EnumDink.MOBDERPEARL && DinkAbilities.Mobderpearl.releaseMob(player,stack,pos,side);
     }
 
