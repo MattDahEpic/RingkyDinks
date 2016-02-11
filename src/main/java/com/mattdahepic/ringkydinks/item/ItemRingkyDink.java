@@ -11,6 +11,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -42,11 +44,22 @@ public class ItemRingkyDink extends Item implements IBauble {
     }
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-        tooltip.add(DinkValues.getEnabled(stack) ? "Enabled" : "Disabled");
+        DinkValues.EnumDink dink = DinkValues.getDinkType(stack);
+        if (dink == DinkValues.EnumDink.MOBDERPEARL) {
+            tooltip.add(DinkAbilities.Mobderpearl.getHasMob(stack) ? "Contains "+ DinkAbilities.Mobderpearl.getMobName(stack): "Empty");
+        } else if (!dink.hasUseAbility) {
+            tooltip.add(DinkValues.getEnabled(stack) ? "Enabled" : "Disabled");
+        }
     }
     @Override
     public boolean hasEffect(ItemStack stack) {
-        return DinkValues.getEnabled(stack);
+        DinkValues.EnumDink dink = DinkValues.getDinkType(stack);
+        if (dink == DinkValues.EnumDink.MOBDERPEARL) {
+            return DinkAbilities.Mobderpearl.getHasMob(stack);
+        } else if (!dink.hasUseAbility) {
+            return DinkValues.getEnabled(stack);
+        }
+        return false;
     }
 
     /* DINK ABILITIES */
@@ -55,6 +68,15 @@ public class ItemRingkyDink extends Item implements IBauble {
     }
     public ItemStack onItemRightClick (ItemStack stack, World world, EntityPlayer player) {
         return DinkAbilities.onUse(DinkValues.getDinkType(stack),player,stack);
+    }
+    public boolean onInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase target) {
+        if (DinkValues.getDinkType(stack) == DinkValues.EnumDink.MOBDERPEARL && DinkAbilities.ItemConsume.doesDinkHaveItemsNeededToFunction(DinkValues.EnumDink.MOBDERPEARL,player,false)) {
+            return DinkAbilities.Mobderpearl.captureMob(player, stack, target);
+        }
+        return false;
+    }
+    public boolean onBlockClick(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
+        return DinkValues.getDinkType(stack) == DinkValues.EnumDink.MOBDERPEARL && DinkAbilities.Mobderpearl.releaseMob(player,stack,pos,side);
     }
 
     /* BAUBLES */

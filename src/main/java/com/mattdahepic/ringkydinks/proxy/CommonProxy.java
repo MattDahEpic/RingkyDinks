@@ -32,6 +32,10 @@ public class CommonProxy {
         GameRegistry.addShapedRecipe(DinkValues.getDinkOfType(DinkValues.EnumDink.WATERBREATHING),"bpb","ptp","bpb",'b',Items.bucket,'p',new ItemStack(Items.fish,1,3),'t',dinkTemplate);
         GameRegistry.addShapedRecipe(DinkValues.getDinkOfType(DinkValues.EnumDink.SATURATION),"cfp","atb","mrs",'c',Items.cooked_chicken,'f',Items.cooked_fish,'p',Items.cooked_porkchop,'a',Items.apple,'b',Items.bread,'m',Items.cooked_mutton,'r',Items.cooked_rabbit,'s',Items.cooked_beef,'t',dinkTemplate);
         GameRegistry.addShapedRecipe(DinkValues.getDinkOfType(DinkValues.EnumDink.SPEED),"sss","sts","sss",'s',Items.sugar,'t',dinkTemplate);
+        //TODO: CHEST
+        //TODO: ENDERCHEST
+        //TODO: CRAFTINGTABLE
+        GameRegistry.addShapedRecipe(DinkValues.getDinkOfType(DinkValues.EnumDink.MOBDERPEARL),"epe","ptp","epe",'e',Items.ender_eye,'p',Items.ender_pearl,'t',dinkTemplate);
         //ringkydinks
         for (DinkValues.EnumDink d : DinkValues.EnumDink.values()) {
             if (d.level == null) continue;
