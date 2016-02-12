@@ -2,7 +2,6 @@ package com.mattdahepic.ringkydinks.proxy;
 
 import com.mattdahepic.ringkydinks.RingkyDinks;
 import com.mattdahepic.ringkydinks.dink.DinkValues;
-import com.mattdahepic.ringkydinks.dink.recipe.RDRecipeHandler;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -33,14 +32,14 @@ public class CommonProxy {
         GameRegistry.addShapedRecipe(DinkValues.getDinkOfType(DinkValues.EnumDink.SATURATION),"cfp","atb","mrs",'c',Items.cooked_chicken,'f',Items.cooked_fish,'p',Items.cooked_porkchop,'a',Items.apple,'b',Items.bread,'m',Items.cooked_mutton,'r',Items.cooked_rabbit,'s',Items.cooked_beef,'t',dinkTemplate);
         GameRegistry.addShapedRecipe(DinkValues.getDinkOfType(DinkValues.EnumDink.SPEED),"sss","sts","sss",'s',Items.sugar,'t',dinkTemplate);
         //TODO: CHEST
-        //TODO: ENDERCHEST
-        //TODO: CRAFTINGTABLE
+        GameRegistry.addShapedRecipe(DinkValues.getDinkOfType(DinkValues.EnumDink.ENDERCHEST),"ece","ptp","epe",'e',Items.ender_eye,'p',Items.ender_pearl,'c',Blocks.ender_chest,'t',dinkTemplate);
+        GameRegistry.addShapedRecipe(DinkValues.getDinkOfType(DinkValues.EnumDink.CRAFTINGTABLE),"cpc","ptp","cpc",'c',Blocks.crafting_table,'p',Items.ender_pearl,'t',dinkTemplate);
         GameRegistry.addShapedRecipe(DinkValues.getDinkOfType(DinkValues.EnumDink.MOBDERPEARL),"epe","ptp","epe",'e',Items.ender_eye,'p',Items.ender_pearl,'t',dinkTemplate);
         //ringkydinks
         for (DinkValues.EnumDink d : DinkValues.EnumDink.values()) {
             if (d.level == null) continue;
-            GameRegistry.addRecipe(RDRecipeHandler.getRingAssembly(d));
-            GameRegistry.addRecipe(RDRecipeHandler.getRingDissassembly(d));
+            GameRegistry.addShapelessRecipe(DinkValues.getRingkyDinkOfType(d),DinkValues.getDinkOfType(d),DinkValues.getRingForDink(d)); //ring assembly //todo: doesnt return correct ringkydink
+            GameRegistry.addShapelessRecipe(DinkValues.getDinkOfType(d),DinkValues.getRingkyDinkOfType(d)); // ring disassembly //todo: doesnt return correct dink
         }
     }
 }

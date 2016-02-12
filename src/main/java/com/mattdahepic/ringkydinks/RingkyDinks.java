@@ -1,8 +1,8 @@
 package com.mattdahepic.ringkydinks;
 
 import com.mattdahepic.mdecore.update.UpdateChecker;
-import com.mattdahepic.ringkydinks.dink.DinkAbilities;
 import com.mattdahepic.ringkydinks.dink.DinkValues;
+import com.mattdahepic.ringkydinks.dink.ability.DinkAbilities;
 import com.mattdahepic.ringkydinks.item.ItemDink;
 import com.mattdahepic.ringkydinks.item.ItemRing;
 import com.mattdahepic.ringkydinks.item.ItemRingkyDink;

@@ -37,8 +37,6 @@ public class RDConfig extends ConfigSyncable {
     @Config(CAT_CONSUMEITEMS) @Comment({"What item should the night vision ring consume?"}) public static String nightvisionConsumeItem = "minecraft:torch@0";
     @Config(CAT_CONSUMEITEMS) @Comment({"What item should the speed ring consume?"}) public static String speedConusmeItem = "minecraft:sugar@0";
     //TODO: CHEST
-    //TODO: ENDERCHEST
-    //TODO: CRAFTINGTABLE
     @Config(CAT_CONSUMEITEMS) @Comment({"What item should the mobderpearl consume?"}) public static String mobderpearlConsumeItem = "minecraft:ender_pearl@0";
 
     private static ConfigSyncable INSTANCE;

@@ -54,9 +54,9 @@ public class DinkValues {
         SATURATION(false,true,DinkLevel.TIER2),
         SPEED(false,true,DinkLevel.TIER2),
         //CHEST(true,false,DinkLevel.TIER1),
-        //ENDERCHEST(DinkLevel.TIER1),
-        //CRAFTINGTABLE(DinkLevel.TIER1),
-        MOBDERPEARL(true,false,DinkLevel.TIER2); //like golden lasso
+        ENDERCHEST(true,false,DinkLevel.TIER1),
+        CRAFTINGTABLE(true,false,DinkLevel.TIER1),
+        MOBDERPEARL(true,false,DinkLevel.TIER2);
 
         public final boolean hasUseAbility;
         public final boolean constantItemConsumption;

@@ -1,7 +1,8 @@
-package com.mattdahepic.ringkydinks.dink;
+package com.mattdahepic.ringkydinks.dink.ability;
 
 import com.mattdahepic.mdecore.helpers.ItemHelper;
 import com.mattdahepic.ringkydinks.config.RDConfig;
+import com.mattdahepic.ringkydinks.dink.DinkValues;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -9,14 +10,12 @@ import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.InventoryEnderChest;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.*;
 
 import java.util.List;
 
@@ -37,19 +36,18 @@ public class DinkAbilities {
         if (!dink.hasUseAbility) {
             DinkValues.setEnabled(stk,!DinkValues.getEnabled(stk)); //reverse enabled value
         } else {
-            if (ItemConsume.doesDinkHaveItemsNeededToFunction(dink, player, false)) {
+            if (ItemConsume.doesDinkHaveItemsNeededToFunction(dink, player, false) && !player.worldObj.isRemote) { //has items and is on server
                 switch (dink) {
-                    /*
-                    case CHEST:
-                       player.openGui(RingkyDinks.instance,);
-                       break; //todo
+                    /*case CHEST:
+                        player.openGui(RingkyDinks.instance,);
+                        break; //todo*/
                     case ENDERCHEST:
-                        player.openGui(RingkyDinks.instance,);
-                        break; //todo
+                        InventoryEnderChest enderChest = player.getInventoryEnderChest();
+                        player.displayGUIChest(enderChest);
+                        break;
                     case CRAFTINGTABLE:
-                        player.openGui(RingkyDinks.instance,);
-                        break; //todo
-                    */
+                        player.displayGui(new DinkAbilityCraftingTable.InterfaceFakeCraftingTable(player.worldObj));
+                        break;
                 }
             }
         }
@@ -66,12 +64,10 @@ public class DinkAbilities {
                 if (target instanceof IBossDisplayData) return false; //can't be a boss
                 if (((EntityLiving)target).getMaxHealth() > player.getMaxHealth()) return false; //can't be stronger than the player
                 /* BEGIN MOB CAPTURE */
-                stack.getTagCompound().setBoolean(TAG_MOBDERPEARL_HAS_MOB,true);
-                NBTTagCompound mob = target.serializeNBT();
-                stack.getTagCompound().setTag(TAG_MOBDERPEARL_MOB,mob);
-                stack.getTagCompound().setString(TAG_MOBDERPREAL_MOB_NAME,target.getName());
+                stack.getTagCompound().setBoolean(TAG_MOBDERPEARL_HAS_MOB, true);
+                stack.getTagCompound().setTag(TAG_MOBDERPEARL_MOB, target.serializeNBT());
+                stack.getTagCompound().setString(TAG_MOBDERPREAL_MOB_NAME, target.getName());
                 target.setDead();
-                player.inventory.markDirty();
                 return true;
             }
             return false;
@@ -90,7 +86,6 @@ public class DinkAbilities {
                 stack.getTagCompound().setBoolean(TAG_MOBDERPEARL_HAS_MOB, false);
                 stack.getTagCompound().removeTag(TAG_MOBDERPREAL_MOB_NAME);
                 stack.getTagCompound().removeTag(TAG_MOBDERPEARL_MOB);
-                player.inventory.markDirty();
                 return true;
             }
             return false;
@@ -117,20 +112,23 @@ public class DinkAbilities {
         }
         private static boolean doConsume (DinkValues.EnumDink dink, EntityPlayer player) {
             boolean ret = false;
-            for (int index = 0; index < player.inventory.getSizeInventory(); index++)  {
-                ItemStack i = player.inventory.getStackInSlot(index);
-                if (i != null) {
-                    if (isCorrectConsumeItemForDink(dink,i)) {
-                        if (i.stackSize >= getConsumeAmountForDink(dink)) {
-                            i.stackSize = i.stackSize - getConsumeAmountForDink(dink);
-                            if (i.getItem().hasContainerItem(i)) {
-                                player.inventory.addItemStackToInventory(i.getItem().getContainerItem(i));
+            if (!player.worldObj.isRemote) {
+                for (int index = 0; index < player.inventory.getSizeInventory(); index++) {
+                    ItemStack i = player.inventory.getStackInSlot(index);
+                    if (i != null) {
+                        if (isCorrectConsumeItemForDink(dink, i)) {
+                            if (i.stackSize >= getConsumeAmountForDink(dink)) {
+                                i.stackSize = i.stackSize - getConsumeAmountForDink(dink);
+                                if (i.getItem().hasContainerItem(i)) {
+                                    player.inventory.addItemStackToInventory(i.getItem().getContainerItem(i));
+                                }
+                                ret = true;
                             }
-                            ret = true;
                         }
+                        if (i.stackSize == 0) player.inventory.setInventorySlotContents(index, null);
                     }
-                    if (i.stackSize == 0) player.inventory.setInventorySlotContents(index,null);
                 }
+                if (!ret) player.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "Not enough items to fuel the " + dink.getType() + " ring!"));
             }
             return ret;
         }
@@ -167,8 +165,9 @@ public class DinkAbilities {
                     fullName = RDConfig.speedConusmeItem;
                     break;
                 //TODO: CHEST
-                //TODO: ENDERCHEST
-                //TODO: CRAFTINGTABLE
+                case ENDERCHEST:
+                case CRAFTINGTABLE:
+                    return true;
                 case MOBDERPEARL:
                     fullName = RDConfig.mobderpearlConsumeItem;
                     break;
@@ -200,8 +199,9 @@ public class DinkAbilities {
                 case SPEED:
                     return RDConfig.speedConsumeAmount;
                 //TODO: CHEST
-                //TODO: ENDERCHEST
-                //TODO: CRAFTINGTABLE
+                case ENDERCHEST:
+                case CRAFTINGTABLE:
+                    return 0;
                 case MOBDERPEARL:
                     return RDConfig.mobderpearlConsumeAmount;
             }
