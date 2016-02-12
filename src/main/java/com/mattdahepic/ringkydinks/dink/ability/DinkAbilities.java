@@ -36,7 +36,7 @@ public class DinkAbilities {
         if (!dink.hasUseAbility) {
             DinkValues.setEnabled(stk,!DinkValues.getEnabled(stk)); //reverse enabled value
         } else {
-            if (ItemConsume.doesDinkHaveItemsNeededToFunction(dink, player, false) && !player.worldObj.isRemote) { //has items and is on server
+            if (!player.worldObj.isRemote) { //is on server (these dinks are free to use
                 switch (dink) {
                     /*case CHEST:
                         player.openGui(RingkyDinks.instance,);
@@ -120,7 +120,7 @@ public class DinkAbilities {
                             if (i.stackSize >= getConsumeAmountForDink(dink)) {
                                 i.stackSize = i.stackSize - getConsumeAmountForDink(dink);
                                 if (i.getItem().hasContainerItem(i)) {
-                                    player.inventory.addItemStackToInventory(i.getItem().getContainerItem(i));
+                                    player.inventory.addItemStackToInventory(i.getItem().getContainerItem(i)); //todo: dupes rings for dinks which have no cost
                                 }
                                 ret = true;
                             }
