@@ -27,7 +27,7 @@ public class ClientProxy extends CommonProxy {
             @Override
             public ModelResourceLocation getModelLocation(ItemStack stack) {
                 DinkValues.EnumDink dink = DinkValues.getDinkType(stack);
-                if (dink == null)  return (ModelResourceLocation)TextureMap.LOCATION_MISSING_TEXTURE;
+                if (dink == null) return new ModelResourceLocation(TextureMap.LOCATION_MISSING_TEXTURE,"inventory");
                 return new ModelResourceLocation("ringkydinks:dink/dink_"+dink.getType(),"inventory");
             }
         });
@@ -35,7 +35,7 @@ public class ClientProxy extends CommonProxy {
             @Override
             public ModelResourceLocation getModelLocation(ItemStack stack) {
                 DinkValues.EnumDink dink = DinkValues.getDinkType(stack);
-                if (dink == null || dink == DinkValues.EnumDink.TEMPLATE) return (ModelResourceLocation)TextureMap.LOCATION_MISSING_TEXTURE;
+                if (dink == null || dink == DinkValues.EnumDink.TEMPLATE) return new ModelResourceLocation(TextureMap.LOCATION_MISSING_TEXTURE,"inventory");
                 return new ModelResourceLocation("ringkydinks:ringkydink/ringkydink_"+DinkValues.getDinkType(stack).getType(),"inventory");
             }
         });

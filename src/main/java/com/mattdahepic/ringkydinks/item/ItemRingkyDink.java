@@ -45,19 +45,23 @@ public class ItemRingkyDink extends Item implements IBauble {
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
         DinkValues.EnumDink dink = DinkValues.getDinkType(stack);
-        if (dink == DinkValues.EnumDink.MOBDERPEARL) {
-            tooltip.add(DinkAbilities.Mobderpearl.getHasMob(stack) ? "Contains "+ DinkAbilities.Mobderpearl.getMobName(stack): "Empty");
-        } else if (!dink.hasUseAbility) {
-            tooltip.add(DinkValues.getEnabled(stack) ? "Enabled" : "Disabled");
+        if (dink != null) {
+            if (dink == DinkValues.EnumDink.MOBDERPEARL) {
+                tooltip.add(DinkAbilities.Mobderpearl.getHasMob(stack) ? "Contains " + DinkAbilities.Mobderpearl.getMobName(stack) : "Empty");
+            } else if (!dink.hasUseAbility) {
+                tooltip.add(DinkValues.getEnabled(stack) ? "Enabled" : "Disabled");
+            }
         }
     }
     @Override
     public boolean hasEffect(ItemStack stack) {
         DinkValues.EnumDink dink = DinkValues.getDinkType(stack);
-        if (dink == DinkValues.EnumDink.MOBDERPEARL) {
-            return DinkAbilities.Mobderpearl.getHasMob(stack);
-        } else if (!dink.hasUseAbility) {
-            return DinkValues.getEnabled(stack);
+        if (dink != null) {
+            if (dink == DinkValues.EnumDink.MOBDERPEARL) {
+                return DinkAbilities.Mobderpearl.getHasMob(stack);
+            } else if (!dink.hasUseAbility) {
+                return DinkValues.getEnabled(stack);
+            }
         }
         return false;
     }
@@ -65,6 +69,7 @@ public class ItemRingkyDink extends Item implements IBauble {
     /* DINK ABILITIES */
     @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+        if (DinkValues.getDinkType(stack) == null)return; //todo: remove
         DinkAbilities.tick(DinkValues.getDinkType(stack),(EntityPlayer)entityIn,stack);
     }
     @Override

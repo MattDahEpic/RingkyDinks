@@ -35,9 +35,10 @@ public class DinkValues {
     }
 
     public static boolean getEnabled (ItemStack stk) {
-        return stk.getTagCompound().getBoolean(TAG_DINK_ENABLED);
+        return stk.getTagCompound() != null ? stk.getTagCompound().getBoolean(TAG_DINK_ENABLED) : false; //todo: change back
     }
     public static void setEnabled (ItemStack stk, boolean enable) {
+        if (stk.getTagCompound() == null) stk.setTagCompound(new NBTTagCompound()); //todo: remove
         stk.getTagCompound().setBoolean(TAG_DINK_ENABLED,enable);
     }
 
