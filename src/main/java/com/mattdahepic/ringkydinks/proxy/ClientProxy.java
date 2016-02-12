@@ -26,14 +26,17 @@ public class ClientProxy extends CommonProxy {
         ModelLoader.setCustomMeshDefinition(RingkyDinks.dink, new ItemMeshDefinition() {
             @Override
             public ModelResourceLocation getModelLocation(ItemStack stack) {
-                return new ModelResourceLocation("ringkydinks:dink/dink_"+DinkValues.getDinkType(stack).getType(),"inventory");
+                DinkValues.EnumDink dink = DinkValues.getDinkType(stack);
+                if (dink == null)  return (ModelResourceLocation)TextureMap.LOCATION_MISSING_TEXTURE;
+                return new ModelResourceLocation("ringkydinks:dink/dink_"+dink.getType(),"inventory");
             }
         });
         ModelLoader.setCustomMeshDefinition(RingkyDinks.ringkydink, new ItemMeshDefinition() {
             @Override
             public ModelResourceLocation getModelLocation(ItemStack stack) {
                 DinkValues.EnumDink dink = DinkValues.getDinkType(stack);
-                return dink != DinkValues.EnumDink.TEMPLATE ?  new ModelResourceLocation("ringkydinks:ringkydink/ringkydink_"+DinkValues.getDinkType(stack).getType(),"inventory") : (ModelResourceLocation)TextureMap.LOCATION_MISSING_TEXTURE;
+                if (dink == null || dink == DinkValues.EnumDink.TEMPLATE) return (ModelResourceLocation)TextureMap.LOCATION_MISSING_TEXTURE;
+                return new ModelResourceLocation("ringkydinks:ringkydink/ringkydink_"+DinkValues.getDinkType(stack).getType(),"inventory");
             }
         });
     }

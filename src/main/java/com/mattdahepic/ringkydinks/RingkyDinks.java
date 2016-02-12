@@ -1,6 +1,7 @@
 package com.mattdahepic.ringkydinks;
 
 import com.mattdahepic.mdecore.update.UpdateChecker;
+import com.mattdahepic.ringkydinks.config.RDConfig;
 import com.mattdahepic.ringkydinks.dink.DinkValues;
 import com.mattdahepic.ringkydinks.dink.ability.DinkAbilities;
 import com.mattdahepic.ringkydinks.item.ItemDink;
@@ -55,6 +56,7 @@ public class RingkyDinks {
     @Mod.EventHandler
     public void preInit (FMLPreInitializationEvent e) {
         MinecraftForge.EVENT_BUS.register(this);
+        RDConfig.instance(MODID).initialize(e);
         proxy.registerItems();
         proxy.registerTextures();
     }
