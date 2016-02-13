@@ -78,18 +78,6 @@ public class RingkyDinks {
 
             for (ItemStack s : p.inventory.mainInventory) {
                 if (s != null && s.getItem() instanceof ItemRingkyDink) {
-                    /* BEGIN CONVERSION */ //TODO: remove in next version
-                    if (s.getTagCompound() != null) {
-                        if (s.getTagCompound().hasKey("dinktype")) {
-                            s.getTagCompound().setString("dink.type", s.getTagCompound().getString("dinktype"));
-                            s.getTagCompound().removeTag("dinktype");
-                        }
-                        if (s.getTagCompound().hasKey("dinkenabled")) {
-                            s.getTagCompound().setBoolean("dink.enabled", s.getTagCompound().getBoolean("dinkenabled"));
-                            s.getTagCompound().removeTag("dinkenabled");
-                        }
-                    }
-                    /* END CONVERSION */
                     currRings++; //get amount of enabled and disabled rings
                     if (DinkValues.getEnabled(s)) {
                         dinksToNotDisable.add(DinkValues.getDinkType(s)); //dont disable enabled rings powers

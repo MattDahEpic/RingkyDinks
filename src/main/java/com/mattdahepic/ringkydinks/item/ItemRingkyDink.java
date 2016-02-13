@@ -69,7 +69,7 @@ public class ItemRingkyDink extends Item implements IBauble {
     /* DINK ABILITIES */
     @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-        if (DinkValues.getDinkType(stack) == null)return; //todo: remove
+        if (DinkValues.getDinkType(stack) == null) return; //update safety
         DinkAbilities.tick(DinkValues.getDinkType(stack),(EntityPlayer)entityIn,stack);
     }
     @Override

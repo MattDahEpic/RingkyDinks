@@ -23,8 +23,6 @@ public class RDConfig extends ConfigSyncable {
     @Config(CAT_CONSUMEAMOUNT) @Comment({"How many food items should the saturation ring consume every consumption interval?","Set to 0 to disable."}) @Range(min = 0,max = 64) public static int saturationConsumeAmount = 1;
     @Config(CAT_CONSUMEAMOUNT) @Comment({"How many items should the speed ring consume every consumption interval?","Set to 0 to disable."}) @Range(min = 0,max = 64) public static int speedConsumeAmount = 1;
     //TODO: CHEST
-    //TODO: ENDERCHEST
-    //TODO: CRAFTINGTABLE
     @Config(CAT_CONSUMEAMOUNT) @Comment({"How many items should the mobderpearl consume when it grabs a mob?","Set to 0 to disable."}) @Range(min = 0,max = 64) public static int mobderpearlConsumeAmount = 1;
 
     @Config(CAT_CONSUMEITEMS) @Comment({"What item should the flight ring consume?"}) public static String flightConsumeItem = "minecraft:feather@0";
