@@ -9,10 +9,8 @@ import com.mattdahepic.ringkydinks.item.ItemRing;
 import com.mattdahepic.ringkydinks.item.ItemRingkyDink;
 import com.mattdahepic.ringkydinks.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -21,9 +19,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Mod(modid = RingkyDinks.MODID,name = RingkyDinks.NAME,version = RingkyDinks.VERSION,dependencies = RingkyDinks.DEPENDENCIES)
 public class RingkyDinks {
@@ -70,27 +65,19 @@ public class RingkyDinks {
         UpdateChecker.printMessageToPlayer(MODID, e.player);
     }
     @SubscribeEvent
-    public void tick (TickEvent.WorldTickEvent e) { //TODO: REDO THIS ENTIRE THING ALREADY
-        for (EntityPlayer p : MinecraftServer.getServer().getConfigurationManager().playerEntityList) {
-            int prevRings = p.getEntityData().getInteger("ringCount");
-            List<DinkValues.EnumDink> dinksToNotDisable = new ArrayList<DinkValues.EnumDink>();
-            int currRings = 0;
-
-            for (ItemStack s : p.inventory.mainInventory) {
-                if (s != null && s.getItem() instanceof ItemRingkyDink) {
-                    currRings++; //get amount of enabled and disabled rings
-                    if (DinkValues.getEnabled(s)) {
-                        dinksToNotDisable.add(DinkValues.getDinkType(s)); //dont disable enabled rings powers
+    public void tick (TickEvent.PlayerTickEvent e) {
+        for (DinkValues.EnumDink d : DinkValues.EnumDink.values()) { //for each dink type
+            boolean hasRing = false;
+            for (ItemStack i : e.player.inventory.mainInventory) { //check every slot
+                if (i != null && i.getItem() instanceof ItemRingkyDink) {
+                    if (DinkValues.getDinkType(i) == d && DinkValues.getEnabled(i)) { //if enabled dink of this type
+                        hasRing = true;
+                        break;
                     }
                 }
             }
-            p.getEntityData().setInteger("ringCount",currRings);
-            if (currRings < prevRings) {
-                for (DinkValues.EnumDink d : DinkValues.EnumDink.values()) { //every dink
-                    if (!dinksToNotDisable.contains(d)) { //every non-enabled dink or dink the player isnt carrying a ring for
-                        DinkAbilities.disable(d,p,null); //disable the dink ability (with no ring to its name (as the ring may have been dropped), just disable the ability)
-                    }
-                }
+            if (!hasRing) {
+                DinkAbilities.disable(d,e.player,null);
             }
         }
     }

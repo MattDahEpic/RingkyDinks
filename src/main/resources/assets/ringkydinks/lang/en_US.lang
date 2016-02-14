@@ -15,7 +15,7 @@ item.dink.nightvision.name=Nightvision Dink
 item.dink.saturation.name=Saturation Dink
 item.dink.speed.name=Speed Dink
 item.dink.chest.name=Chest Dink
-item.dink.enderchest.name=Enderchest Dink
+item.dink.enderchest.name=Ender Chest Dink
 item.dink.craftingtable.name=Crafting Table Dink
 item.dink.mobderpearl.name=Mobderpearl Dink
 
@@ -31,7 +31,7 @@ item.ringkydink.nightvision.name=Night Vision RingkyDink
 item.ringkydink.saturation.name=Saturation RingkyDink
 item.ringkydink.speed.name=Speed RingkyDink
 item.ringkydink.chest.name=Chest RingkyDink
-item.ringkydink.enderchest.name=Enderchest RingkyDink
+item.ringkydink.enderchest.name=Ender Chest RingkyDink
 item.ringkydink.craftingtable.name=Crafting Table RingkyDink
 item.ringkydink.mobderpearl.name=Mobderpearl RingkyDink
 
@@ -47,3 +47,7 @@ ringkydink.name.waterbreathing=Waterbreathing
 ringkydink.name.nightvision=Night Vision
 ringkydink.name.saturation=Saturation
 ringkydink.name.speed=Speed
+ringkydink.name.chest=Chest
+ringkydink.name.enderchest=Ender Chest
+ringkydink.name.craftingtable=Crafting Table
+ringkydink.name.mobderpearl=Mobderpearl

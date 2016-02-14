@@ -34,9 +34,11 @@ public class DinkAbilities {
     }
     public static ItemStack onUse (DinkValues.EnumDink dink, EntityPlayer player, ItemStack stk) {
         if (!dink.hasUseAbility) {
-            DinkValues.setEnabled(stk,!DinkValues.getEnabled(stk)); //reverse enabled value
+            if (player.isSneaking()) {
+                DinkValues.setEnabled(stk, !DinkValues.getEnabled(stk)); //reverse enabled value
+            }
         } else {
-            if (!player.worldObj.isRemote) { //is on server (these dinks are free to use
+            if (!player.worldObj.isRemote) { //is on server (these dinks are free to use)
                 switch (dink) {
                     /*case CHEST:
                         player.openGui(RingkyDinks.instance,);
@@ -67,6 +69,7 @@ public class DinkAbilities {
                 stack.getTagCompound().setBoolean(TAG_MOBDERPEARL_HAS_MOB, true);
                 stack.getTagCompound().setTag(TAG_MOBDERPEARL_MOB, target.serializeNBT());
                 stack.getTagCompound().setString(TAG_MOBDERPREAL_MOB_NAME, target.getName());
+                player.inventory.setInventorySlotContents(player.inventory.currentItem,stack);
                 target.setDead();
                 return true;
             }
