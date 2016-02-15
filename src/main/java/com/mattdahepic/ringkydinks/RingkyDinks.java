@@ -2,11 +2,13 @@ package com.mattdahepic.ringkydinks;
 
 import com.mattdahepic.mdecore.update.UpdateChecker;
 import com.mattdahepic.ringkydinks.config.RDConfig;
-import com.mattdahepic.ringkydinks.dink.DinkValues;
+import com.mattdahepic.ringkydinks.dink.DinkNBT;
+import com.mattdahepic.ringkydinks.dink.EnumDink;
 import com.mattdahepic.ringkydinks.dink.ability.DinkAbilities;
 import com.mattdahepic.ringkydinks.item.ItemDink;
 import com.mattdahepic.ringkydinks.item.ItemRing;
 import com.mattdahepic.ringkydinks.item.ItemRingkyDink;
+import com.mattdahepic.ringkydinks.item.ItemRubberHand;
 import com.mattdahepic.ringkydinks.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -38,12 +40,13 @@ public class RingkyDinks {
         }
         @Override
         public ItemStack getIconItemStack() {
-            return DinkValues.getRingForDink(DinkValues.EnumDink.FLIGHT);
+            return DinkNBT.getRingkyDinkOfType(EnumDink.FLIGHT);
         }
     };
     public static Item ring = new ItemRing();
     public static Item dink = new ItemDink();
     public static Item ringkydink = new ItemRingkyDink();
+    public static Item rubber_hand = new ItemRubberHand();
 
     @SidedProxy(clientSide = "com.mattdahepic.ringkydinks.proxy.ClientProxy",serverSide = "com.mattdahepic.ringkydinks.proxy.CommonProxy")
     private static CommonProxy proxy;
@@ -66,11 +69,11 @@ public class RingkyDinks {
     }
     @SubscribeEvent
     public void tick (TickEvent.PlayerTickEvent e) {
-        for (DinkValues.EnumDink d : DinkValues.EnumDink.values()) { //for each dink type
+        for (EnumDink d : EnumDink.values()) { //for each dink type
             boolean hasRing = false;
             for (ItemStack i : e.player.inventory.mainInventory) { //check every slot
                 if (i != null && i.getItem() instanceof ItemRingkyDink) {
-                    if (DinkValues.getDinkType(i) == d && DinkValues.getEnabled(i)) { //if enabled dink of this type
+                    if (DinkNBT.getDinkType(i) == d && DinkNBT.getEnabled(i)) { //if enabled dink of this type
                         hasRing = true;
                         break;
                     }

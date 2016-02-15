@@ -3,7 +3,8 @@ package com.mattdahepic.ringkydinks.item;
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import com.mattdahepic.ringkydinks.RingkyDinks;
-import com.mattdahepic.ringkydinks.dink.DinkValues;
+import com.mattdahepic.ringkydinks.dink.DinkNBT;
+import com.mattdahepic.ringkydinks.dink.EnumDink;
 import com.mattdahepic.ringkydinks.dink.ability.DinkAbilities;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -30,37 +31,37 @@ public class ItemRingkyDink extends Item implements IBauble {
         return true;
     }
     public ItemStack getContainerItem (ItemStack stack) {
-        return DinkValues.getRingForDink(DinkValues.getDinkType(stack));
+        return DinkNBT.getRingForDink(DinkNBT.getDinkType(stack));
     }
     public String getUnlocalizedName (ItemStack stack) {
-        return "item.ringkydink."+ DinkValues.getDinkType(stack);
+        return "item.ringkydink."+ DinkNBT.getDinkType(stack);
     }
     @Override
     public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems) {
-        for (DinkValues.EnumDink d : DinkValues.EnumDink.values()) {
-            if (d == DinkValues.EnumDink.TEMPLATE) continue;
-            subItems.add(DinkValues.getRingkyDinkOfType(d));
+        for (EnumDink d : EnumDink.values()) {
+            if (d == EnumDink.TEMPLATE) continue;
+            subItems.add(DinkNBT.getRingkyDinkOfType(d));
         }
     }
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-        DinkValues.EnumDink dink = DinkValues.getDinkType(stack);
+        EnumDink dink = DinkNBT.getDinkType(stack);
         if (dink != null) {
-            if (dink == DinkValues.EnumDink.MOBDERPEARL) {
+            if (dink == EnumDink.MOBDERPEARL) {
                 tooltip.add(DinkAbilities.Mobderpearl.getHasMob(stack) ? "Contains " + DinkAbilities.Mobderpearl.getMobName(stack) : "Empty");
             } else if (!dink.hasUseAbility) {
-                tooltip.add(DinkValues.getEnabled(stack) ? "Enabled" : "Disabled");
+                tooltip.add(DinkNBT.getEnabled(stack) ? "Enabled" : "Disabled");
             }
         }
     }
     @Override
     public boolean hasEffect(ItemStack stack) {
-        DinkValues.EnumDink dink = DinkValues.getDinkType(stack);
+        EnumDink dink = DinkNBT.getDinkType(stack);
         if (dink != null) {
-            if (dink == DinkValues.EnumDink.MOBDERPEARL) {
+            if (dink == EnumDink.MOBDERPEARL) {
                 return DinkAbilities.Mobderpearl.getHasMob(stack);
             } else if (!dink.hasUseAbility) {
-                return DinkValues.getEnabled(stack);
+                return DinkNBT.getEnabled(stack);
             }
         }
         return false;
@@ -69,23 +70,23 @@ public class ItemRingkyDink extends Item implements IBauble {
     /* DINK ABILITIES */
     @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-        if (DinkValues.getDinkType(stack) == null) return; //update safety
-        DinkAbilities.tick(DinkValues.getDinkType(stack),(EntityPlayer)entityIn,stack);
+        if (DinkNBT.getDinkType(stack) == null) return; //update safety
+        DinkAbilities.tick(DinkNBT.getDinkType(stack),(EntityPlayer)entityIn,stack);
     }
     @Override
     public ItemStack onItemRightClick (ItemStack stack, World world, EntityPlayer player) {
-        return DinkAbilities.onUse(DinkValues.getDinkType(stack),player,stack);
+        return DinkAbilities.onUse(DinkNBT.getDinkType(stack),player,stack);
     }
     @Override
     public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase target) {
-        if (DinkValues.getDinkType(stack) == DinkValues.EnumDink.MOBDERPEARL && DinkAbilities.ItemConsume.doesDinkHaveItemsNeededToFunction(DinkValues.EnumDink.MOBDERPEARL,player,false)) {
+        if (DinkNBT.getDinkType(stack) == EnumDink.MOBDERPEARL && DinkAbilities.ItemConsume.doesDinkHaveItemsNeededToFunction(EnumDink.MOBDERPEARL,player,false)) {
             return DinkAbilities.Mobderpearl.captureMob(player, stack, target);
         }
         return false;
     }
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
-        return DinkValues.getDinkType(stack) == DinkValues.EnumDink.MOBDERPEARL && DinkAbilities.Mobderpearl.releaseMob(player,stack,pos,side);
+        return DinkNBT.getDinkType(stack) == EnumDink.MOBDERPEARL && DinkAbilities.Mobderpearl.releaseMob(player,stack,pos,side);
     }
 
     /* BAUBLES */
@@ -93,7 +94,7 @@ public class ItemRingkyDink extends Item implements IBauble {
         return BaubleType.RING;
     }
     public void onWornTick(ItemStack stack, EntityLivingBase player) {
-        DinkAbilities.tick(DinkValues.getDinkType(stack),(EntityPlayer)player,stack);
+        DinkAbilities.tick(DinkNBT.getDinkType(stack),(EntityPlayer)player,stack);
     }
     public void onEquipped(ItemStack stack, EntityLivingBase player) {}
     public void onUnequipped(ItemStack stack, EntityLivingBase player) {}

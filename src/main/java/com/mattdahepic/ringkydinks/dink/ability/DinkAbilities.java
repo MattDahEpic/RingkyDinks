@@ -2,7 +2,8 @@ package com.mattdahepic.ringkydinks.dink.ability;
 
 import com.mattdahepic.mdecore.helpers.ItemHelper;
 import com.mattdahepic.ringkydinks.config.RDConfig;
-import com.mattdahepic.ringkydinks.dink.DinkValues;
+import com.mattdahepic.ringkydinks.dink.DinkNBT;
+import com.mattdahepic.ringkydinks.dink.EnumDink;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,8 +21,8 @@ import net.minecraft.util.*;
 import java.util.List;
 
 public class DinkAbilities {
-    public static void tick (DinkValues.EnumDink dink, EntityPlayer player, ItemStack stk) {
-        if (DinkValues.getEnabled(stk)) { //if enabled
+    public static void tick (EnumDink dink, EntityPlayer player, ItemStack stk) {
+        if (DinkNBT.getEnabled(stk)) { //if enabled
             if (ItemConsume.doesDinkHaveItemsNeededToFunction(dink, player, true)) {
                 enable(dink,player,stk);
                 doDinkAction(dink,player);
@@ -32,10 +33,10 @@ public class DinkAbilities {
             disable(dink,player,stk);
         }
     }
-    public static ItemStack onUse (DinkValues.EnumDink dink, EntityPlayer player, ItemStack stk) {
+    public static ItemStack onUse (EnumDink dink, EntityPlayer player, ItemStack stk) {
         if (!dink.hasUseAbility) {
             if (player.isSneaking()) {
-                DinkValues.setEnabled(stk, !DinkValues.getEnabled(stk)); //reverse enabled value
+                DinkNBT.setEnabled(stk, !DinkNBT.getEnabled(stk)); //reverse enabled value
             }
         } else {
             if (!player.worldObj.isRemote) { //is on server (these dinks are free to use)
@@ -79,7 +80,7 @@ public class DinkAbilities {
             if (getHasMob(stack)  && !player.worldObj.isRemote) { //has mob to release and is on server
                 BlockPos releasePos = blockClicked.offset(sideClicked);
                 EntityLiving mob = (EntityLiving)EntityList.createEntityFromNBT(stack.getTagCompound().getCompoundTag(TAG_MOBDERPEARL_MOB),player.worldObj);
-                mob.setPosition(releasePos.getX(), releasePos.getY(), releasePos.getZ());
+                mob.setPosition(releasePos.getX()+0.5, releasePos.getY(), releasePos.getZ()+0.5);
                 mob.motionX = 0f;
                 mob.motionY = 0f;
                 mob.motionZ = 0f;
@@ -101,7 +102,7 @@ public class DinkAbilities {
         }
     }
     public static class ItemConsume {
-        public static boolean doesDinkHaveItemsNeededToFunction(DinkValues.EnumDink dink, EntityPlayer player, boolean isConstant) {
+        public static boolean doesDinkHaveItemsNeededToFunction(EnumDink dink, EntityPlayer player, boolean isConstant) {
             if (RDConfig.consumeItems) {
                 if (isConstant && dink.constantItemConsumption) {
                     if (player.worldObj.getTotalWorldTime() % RDConfig.consumeInterval == 0) {
@@ -113,7 +114,7 @@ public class DinkAbilities {
             }
             return true;
         }
-        private static boolean doConsume (DinkValues.EnumDink dink, EntityPlayer player) {
+        private static boolean doConsume (EnumDink dink, EntityPlayer player) {
             boolean ret = false;
             if (!player.worldObj.isRemote) {
                 for (int index = 0; index < player.inventory.getSizeInventory(); index++) {
@@ -135,7 +136,7 @@ public class DinkAbilities {
             }
             return ret;
         }
-        private static boolean isCorrectConsumeItemForDink (DinkValues.EnumDink dink, ItemStack compare) {
+        private static boolean isCorrectConsumeItemForDink (EnumDink dink, ItemStack compare) {
             String fullName;
             switch (dink) {
                 case FLIGHT:
@@ -179,7 +180,7 @@ public class DinkAbilities {
             }
             return ItemHelper.isSameIgnoreStackSize(compare, ItemHelper.getItemFromName(fullName.substring(0, fullName.indexOf('@')), Integer.parseInt(fullName.substring(fullName.indexOf('@')+1))));
         }
-        private static int getConsumeAmountForDink (DinkValues.EnumDink dink) {
+        private static int getConsumeAmountForDink (EnumDink dink) {
             switch (dink) {
                 case FLIGHT:
                     return RDConfig.flightConsumeAmount;
@@ -212,8 +213,8 @@ public class DinkAbilities {
         }
     }
 
-    private static void enable (DinkValues.EnumDink dink, EntityPlayer player, ItemStack stack) {
-        DinkValues.setEnabled(stack,true);
+    private static void enable (EnumDink dink, EntityPlayer player, ItemStack stack) {
+        DinkNBT.setEnabled(stack,true);
         switch (dink) {
             case FLIGHT:
                 if (!player.capabilities.allowFlying) {
@@ -223,8 +224,8 @@ public class DinkAbilities {
                 break;
         }
     }
-    public static void disable (DinkValues.EnumDink dink, EntityPlayer player, ItemStack stack) { //TODO: make this private
-        if (stack != null) DinkValues.setEnabled(stack,false);
+    public static void disable (EnumDink dink, EntityPlayer player, ItemStack stack) { //TODO: make this private
+        if (stack != null) DinkNBT.setEnabled(stack,false);
         switch (dink) {
             case FLIGHT:
                 player.capabilities.allowFlying = false;
@@ -244,7 +245,7 @@ public class DinkAbilities {
                 break;
         }
     }
-    private static void doDinkAction (DinkValues.EnumDink dink, EntityPlayer player) {
+    private static void doDinkAction (EnumDink dink, EntityPlayer player) {
         switch (dink) {
             case ANTIPOTION:
                 player.clearActivePotions();
