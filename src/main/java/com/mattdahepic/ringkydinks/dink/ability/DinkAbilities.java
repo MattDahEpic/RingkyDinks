@@ -217,7 +217,7 @@ public class DinkAbilities {
         DinkNBT.setEnabled(stack,true);
         switch (dink) {
             case FLIGHT:
-                if (!player.capabilities.allowFlying) {
+                if (!player.capabilities.allowFlying && player.capabilities.isCreativeMode) {
                     player.capabilities.allowFlying = true;
                     player.sendPlayerAbilities();
                 }
@@ -228,8 +228,10 @@ public class DinkAbilities {
         if (stack != null) DinkNBT.setEnabled(stack,false);
         switch (dink) {
             case FLIGHT:
-                player.capabilities.allowFlying = false;
-                player.sendPlayerAbilities();
+                if (!player.capabilities.isCreativeMode) {
+                    player.capabilities.allowFlying = false;
+                    player.sendPlayerAbilities();
+                }
                 break;
             case WATERBREATHING:
                 player.removePotionEffect(Potion.waterBreathing.id);

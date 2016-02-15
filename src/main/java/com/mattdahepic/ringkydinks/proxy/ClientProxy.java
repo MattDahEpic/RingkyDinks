@@ -20,10 +20,14 @@ public class ClientProxy extends CommonProxy {
         ModelLoader.setCustomModelResourceLocation(RingkyDinks.ring, EnumDink.EnumRing.TIER1.meta,new ModelResourceLocation("ringkydinks:ring/ring1","inventory"));
         ModelLoader.setCustomModelResourceLocation(RingkyDinks.ring, EnumDink.EnumRing.TIER2.meta,new ModelResourceLocation("ringkydinks:ring/ring2","inventory"));
         ModelLoader.setCustomModelResourceLocation(RingkyDinks.ring, EnumDink.EnumRing.TIER3.meta,new ModelResourceLocation("ringkydinks:ring/ring3","inventory"));
+        //rubber hand
+        ModelLoader.setCustomModelResourceLocation(RingkyDinks.rubber_hand,0,new ModelResourceLocation("ringkydinks:rubber_hand","inventory"));
+        //set up dink locations
         for (EnumDink d : EnumDink.values()) {
             ModelBakery.registerItemVariants(RingkyDinks.dink,new ModelResourceLocation("ringkydinks:dink/dink_"+d.getType(),"inventory")); //dink model
             if (d != EnumDink.TEMPLATE) ModelBakery.registerItemVariants(RingkyDinks.ringkydink,new ModelResourceLocation("ringkydinks:ringkydink/ringkydink_"+d.getType(),"inventory")); //ringkydink model
         }
+        //map locations to dinks of their types
         ModelLoader.setCustomMeshDefinition(RingkyDinks.dink, new ItemMeshDefinition() {
             @Override
             public ModelResourceLocation getModelLocation(ItemStack stack) {
