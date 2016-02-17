@@ -5,7 +5,8 @@ import baubles.api.IBauble;
 import com.mattdahepic.ringkydinks.RingkyDinks;
 import com.mattdahepic.ringkydinks.dink.DinkNBT;
 import com.mattdahepic.ringkydinks.dink.EnumDink;
-import com.mattdahepic.ringkydinks.dink.ability.DinkAbilities;
+import com.mattdahepic.ringkydinks.dink.ability.DinkAbilityMobderpearl;
+import com.mattdahepic.ringkydinks.dink.ability.IDinkAbility;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -48,8 +49,8 @@ public class ItemRingkyDink extends Item implements IBauble {
         EnumDink dink = DinkNBT.getDinkType(stack);
         if (dink != null) {
             if (dink == EnumDink.MOBDERPEARL) {
-                tooltip.add(DinkAbilities.Mobderpearl.getHasMob(stack) ? "Contains " + DinkAbilities.Mobderpearl.getMobName(stack) : "Empty");
-            } else if (!dink.hasUseAbility) {
+                tooltip.add(DinkAbilityMobderpearl.getHasMob(stack) ? "Contains " + DinkAbilityMobderpearl.getMobName(stack) : "Empty");
+            } else if (!dink.ability.hasUseAbility()) {
                 tooltip.add(DinkNBT.getEnabled(stack) ? "Enabled" : "Disabled");
             }
         }
@@ -59,8 +60,8 @@ public class ItemRingkyDink extends Item implements IBauble {
         EnumDink dink = DinkNBT.getDinkType(stack);
         if (dink != null) {
             if (dink == EnumDink.MOBDERPEARL) {
-                return DinkAbilities.Mobderpearl.getHasMob(stack);
-            } else if (!dink.hasUseAbility) {
+                return DinkAbilityMobderpearl.getHasMob(stack);
+            } else if (!dink.ability.hasUseAbility()) {
                 return DinkNBT.getEnabled(stack);
             }
         }
@@ -69,24 +70,21 @@ public class ItemRingkyDink extends Item implements IBauble {
 
     /* DINK ABILITIES */
     @Override
-    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+    public void onUpdate(ItemStack stack, World worldIn, Entity entity, int itemSlot, boolean isSelected) {
         if (DinkNBT.getDinkType(stack) == null) return; //update safety
-        DinkAbilities.tick(DinkNBT.getDinkType(stack),(EntityPlayer)entityIn,stack);
+        IDinkAbility.onUpdate(DinkNBT.getDinkType(stack).ability,(EntityPlayer)entity,stack);
     }
     @Override
     public ItemStack onItemRightClick (ItemStack stack, World world, EntityPlayer player) {
-        return DinkAbilities.onUse(DinkNBT.getDinkType(stack),player,stack);
+        return IDinkAbility.onItemRightClick(DinkNBT.getDinkType(stack).ability,player,stack);
     }
     @Override
     public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase target) {
-        if (DinkNBT.getDinkType(stack) == EnumDink.MOBDERPEARL && DinkAbilities.ItemConsume.doesDinkHaveItemsNeededToFunction(EnumDink.MOBDERPEARL,player,false)) {
-            return DinkAbilities.Mobderpearl.captureMob(player, stack, target);
-        }
-        return false;
+        return IDinkAbility.itemInteractionForEntity(DinkNBT.getDinkType(stack).ability,player,stack,target);
     }
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
-        return DinkNBT.getDinkType(stack) == EnumDink.MOBDERPEARL && DinkAbilities.Mobderpearl.releaseMob(player,stack,pos,side);
+        return IDinkAbility.onItemUse(DinkNBT.getDinkType(stack).ability,player,stack,pos,side);
     }
 
     /* BAUBLES */
@@ -94,7 +92,8 @@ public class ItemRingkyDink extends Item implements IBauble {
         return BaubleType.RING;
     }
     public void onWornTick(ItemStack stack, EntityLivingBase player) {
-        DinkAbilities.tick(DinkNBT.getDinkType(stack),(EntityPlayer)player,stack);
+        if (DinkNBT.getDinkType(stack) == null) return; //update safety
+        IDinkAbility.onUpdate(DinkNBT.getDinkType(stack).ability,(EntityPlayer)player,stack);
     }
     public void onEquipped(ItemStack stack, EntityLivingBase player) {}
     public void onUnequipped(ItemStack stack, EntityLivingBase player) {}

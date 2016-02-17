@@ -2,6 +2,7 @@ itemGroup.ringkydinks=Ringky Dinks
 ringkydink.string.abilities=Abilities:
 item.ring.name=Ring
 item.dink.template.name=Dink Template
+item.rubber_hand.name=Rubber Hand
 
 #Dinks
 item.dink.flight.name=Flight Dink
@@ -18,6 +19,8 @@ item.dink.chest.name=Chest Dink
 item.dink.enderchest.name=Ender Chest Dink
 item.dink.craftingtable.name=Crafting Table Dink
 item.dink.mobderpearl.name=Mobderpearl Dink
+item.dink.uphillstepassist.name=Uphill Step Assist Dink
+item.dink.regeneration.name=Regeneration Dink
 
 #Ringkydinks
 item.ringkydink.flight.name=Flight RingkyDink
@@ -34,6 +37,8 @@ item.ringkydink.chest.name=Chest RingkyDink
 item.ringkydink.enderchest.name=Ender Chest RingkyDink
 item.ringkydink.craftingtable.name=Crafting Table RingkyDink
 item.ringkydink.mobderpearl.name=Mobderpearl RingkyDink
+item.ringkydink.uphillstepassist.name=Uphill Step Assist RingkyDink
+item.ringkydink.regeneration.name=Regeneration RingkyDink
 
 #Nice Names
 ringkydink.name.template=Template
@@ -51,3 +56,5 @@ ringkydink.name.chest=Chest
 ringkydink.name.enderchest=Ender Chest
 ringkydink.name.craftingtable=Crafting Table
 ringkydink.name.mobderpearl=Mobderpearl
+ringkydink.name.uphillstepassist=Uphill Step Assist
+ringkydink.name.regeneration=Regeneration

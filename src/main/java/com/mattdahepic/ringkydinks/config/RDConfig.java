@@ -24,6 +24,7 @@ public class RDConfig extends ConfigSyncable {
     @Config(CAT_CONSUMEAMOUNT) @Comment({"How many items should the speed ring consume every consumption interval?","Set to 0 to disable."}) @Range(min = 0,max = 64) public static int speedConsumeAmount = 1;
     //TODO: CHEST
     @Config(CAT_CONSUMEAMOUNT) @Comment({"How many items should the mobderpearl consume when it grabs a mob?","Set to 0 to disable."}) @Range(min = 0,max = 64) public static int mobderpearlConsumeAmount = 1;
+    @Config(CAT_CONSUMEAMOUNT) @Comment({"How many items should the regeneration ring consume every consumption interval?","Set to 0 to disable."}) @Range(min = 0,max = 64) public static int regenerationConsumeAmount = 4;
 
     @Config(CAT_CONSUMEITEMS) @Comment({"What item should the flight ring consume?"}) public static String flightConsumeItem = "minecraft:feather@0";
     @Config(CAT_CONSUMEITEMS) @Comment({"What item should the lava walking ring consume?"}) public static String lavawalkConsumeItem = "minecraft:cobblestone@0";
@@ -36,6 +37,7 @@ public class RDConfig extends ConfigSyncable {
     @Config(CAT_CONSUMEITEMS) @Comment({"What item should the speed ring consume?"}) public static String speedConusmeItem = "minecraft:sugar@0";
     //TODO: CHEST
     @Config(CAT_CONSUMEITEMS) @Comment({"What item should the mobderpearl consume?"}) public static String mobderpearlConsumeItem = "minecraft:ender_pearl@0";
+    @Config(CAT_CONSUMEITEMS) @Comment({"What item should the regeneration ring consume?"}) public static String regenerationConsumeItem = "minecraft:dye@1";
 
     private static ConfigSyncable INSTANCE;
     public static ConfigSyncable instance(String configName) {

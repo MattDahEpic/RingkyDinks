@@ -39,7 +39,9 @@ public class DinkNBT {
         return stk.getTagCompound().getBoolean(TAG_DINK_ENABLED);
     }
     public static void setEnabled (ItemStack stk, boolean enable) {
-        stk.getTagCompound().setBoolean(TAG_DINK_ENABLED,enable);
+        if (stk != null) {
+            stk.getTagCompound().setBoolean(TAG_DINK_ENABLED, enable);
+        }
     }
 
     public static String getNiceDinkNameForTooltip (EnumDink dink) {

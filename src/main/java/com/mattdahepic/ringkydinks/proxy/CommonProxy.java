@@ -12,9 +12,9 @@ public class CommonProxy {
     public void registerTextures () {}
     public void registerItems () {
         GameRegistry.registerItem(RingkyDinks.ring,"ring");
+        GameRegistry.registerItem(RingkyDinks.rubber_hand,"rubber_hand");
         GameRegistry.registerItem(RingkyDinks.dink,"dink");
         GameRegistry.registerItem(RingkyDinks.ringkydink,"ringkydink");
-        GameRegistry.registerItem(RingkyDinks.rubber_hand,"rubber_hand");
     }
     public void registerRecipes () {
         //rings
@@ -39,6 +39,8 @@ public class CommonProxy {
         GameRegistry.addShapedRecipe(DinkNBT.getDinkOfType(EnumDink.ENDERCHEST),"ece","ptp","epe",'e',Items.ender_eye,'p',Items.ender_pearl,'c',Blocks.ender_chest,'t',dinkTemplate);
         GameRegistry.addShapedRecipe(DinkNBT.getDinkOfType(EnumDink.CRAFTINGTABLE),"cpc","ptp","cpc",'c',Blocks.crafting_table,'p',Items.ender_pearl,'t',dinkTemplate);
         GameRegistry.addShapedRecipe(DinkNBT.getDinkOfType(EnumDink.MOBDERPEARL),"epe","ptp","epe",'e',Items.ender_eye,'p',Items.ender_pearl,'t',dinkTemplate);
+        //TODO: uphill step assist
+        //TODO: regeneration
         //ringkydinks
         for (EnumDink d : EnumDink.values()) {
             if (d.ring == null) continue; //ignore template, cause it an independent dink who dont need no ring

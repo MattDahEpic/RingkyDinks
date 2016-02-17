@@ -4,7 +4,6 @@ import com.mattdahepic.mdecore.update.UpdateChecker;
 import com.mattdahepic.ringkydinks.config.RDConfig;
 import com.mattdahepic.ringkydinks.dink.DinkNBT;
 import com.mattdahepic.ringkydinks.dink.EnumDink;
-import com.mattdahepic.ringkydinks.dink.ability.DinkAbilities;
 import com.mattdahepic.ringkydinks.item.ItemDink;
 import com.mattdahepic.ringkydinks.item.ItemRing;
 import com.mattdahepic.ringkydinks.item.ItemRingkyDink;
@@ -80,7 +79,7 @@ public class RingkyDinks {
                 }
             }
             if (!hasRing) {
-                DinkAbilities.disable(d,e.player,null);
+                //d.ability.disable(e.player,null);
             }
         }
     }
