@@ -8,6 +8,7 @@ import com.mattdahepic.ringkydinks.item.ItemDink;
 import com.mattdahepic.ringkydinks.item.ItemRing;
 import com.mattdahepic.ringkydinks.item.ItemRingkyDink;
 import com.mattdahepic.ringkydinks.item.ItemRubberHand;
+import com.mattdahepic.ringkydinks.network.RDNetworkHandler;
 import com.mattdahepic.ringkydinks.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -54,6 +55,7 @@ public class RingkyDinks {
     public void preInit (FMLPreInitializationEvent e) {
         MinecraftForge.EVENT_BUS.register(this);
         RDConfig.instance(MODID).initialize(e);
+        RDNetworkHandler.initPackets();
         proxy.registerItems();
         proxy.registerTextures();
     }
