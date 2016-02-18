@@ -32,6 +32,7 @@ public abstract class IDinkAbility {
                 if (consumeRequiredItemForAbility(ability, player, true)) {
                     DinkNBT.setEnabled(stack, true);
                     ability.enable(player, stack);
+                    ability.tick(player, stack);
                 } else {
                     DinkNBT.setEnabled(stack, false);
                     ability.enable(player, stack);
@@ -56,16 +57,10 @@ public abstract class IDinkAbility {
         return stack;
     }
     public static boolean itemInteractionForEntity (IDinkAbility ability, EntityPlayer player, ItemStack stack, EntityLivingBase target) {
-        if (!player.worldObj.isRemote) {
-            return ability.onEntityClick(player,stack,target);
-        }
-        return false;
+        return ability.onEntityClick(player,stack,target);
     }
     public static boolean onItemUse (IDinkAbility ability, EntityPlayer player, ItemStack stack, BlockPos pos, EnumFacing side) {
-        if (!player.worldObj.isRemote) {
-            return ability.onBlockClick(player,stack,pos,side);
-        }
-        return false;
+        return ability.onBlockClick(player,stack,pos,side);
     }
     static boolean consumeRequiredItemForAbility (IDinkAbility ability, EntityPlayer player, boolean isConstant) {
         if (RDConfig.consumeItems && ability.consumesItems() && !player.worldObj.isRemote) { //if item consumption enabled, the ring consumes items, and on server
@@ -80,9 +75,10 @@ public abstract class IDinkAbility {
     private static boolean doConsume (IDinkAbility ability, EntityPlayer player) {
         for (int index = 0; index < player.inventory.getSizeInventory(); index++) {
             ItemStack i = player.inventory.getStackInSlot(index);
-            if (i != null && ItemHelper.isSameIgnoreStackSize(i,ability.getConsumeItem(i))) { //TODO: make ItemHelper.isSameIgnoreStackSize null-safe
+            if (ItemHelper.isSameIgnoreStackSize(i,ability.getConsumeItem(i))) {
                 if (i.stackSize >= ability.getConsumeItem(i).stackSize) {
                     i.stackSize -= ability.getConsumeItem(i).stackSize;
+                    player.inventory.setInventorySlotContents(index,i);
                     if (i.stackSize == 0) player.inventory.setInventorySlotContents(index, null); //prevent 0 item stacks
                     if (i.getItem().hasContainerItem(i)) {
                         player.inventory.addItemStackToInventory(i.getItem().getContainerItem(i)); //add back buckets for liquids and bowls for mush-stew

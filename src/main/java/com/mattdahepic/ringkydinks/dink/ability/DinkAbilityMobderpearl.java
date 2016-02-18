@@ -49,7 +49,7 @@ public class DinkAbilityMobderpearl extends IDinkAbility {
                 /* BEGIN MOB CAPTURE */
             stack.getTagCompound().setBoolean(TAG_MOBDERPEARL_HAS_MOB, true);
             stack.getTagCompound().setTag(TAG_MOBDERPEARL_MOB, target.serializeNBT());
-            stack.getTagCompound().setString(TAG_MOBDERPREAL_MOB_NAME, target.getName());
+            stack.getTagCompound().setString(TAG_MOBDERPREAL_MOB_NAME,target.hasCustomName() ? target.getCustomNameTag() : target.getName());
             player.inventory.setInventorySlotContents(player.inventory.currentItem,stack);
             target.setDead();
             return true;
