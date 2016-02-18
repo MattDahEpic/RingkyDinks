@@ -20,6 +20,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 @Mod(modid = RingkyDinks.MODID,name = RingkyDinks.NAME,version = RingkyDinks.VERSION,dependencies = RingkyDinks.DEPENDENCIES)
 public class RingkyDinks {
@@ -67,7 +68,7 @@ public class RingkyDinks {
     public void joinServer (PlayerEvent.PlayerLoggedInEvent e) {
         UpdateChecker.printMessageToPlayer(MODID, e.player);
     }
-    /*@SubscribeEvent
+    @SubscribeEvent
     public void tick (TickEvent.PlayerTickEvent e) {
         for (EnumDink d : EnumDink.values()) { //for each dink type
             if (d.ability == null) continue; //ignore template
@@ -84,5 +85,5 @@ public class RingkyDinks {
                 d.ability.disable(e.player,null);
             }
         }
-    }*/
+    }
 }

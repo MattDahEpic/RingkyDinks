@@ -48,8 +48,6 @@ public class CommonProxy {
             if (d.ring == null) continue; //ignore template, cause it an independent dink who dont need no ring
             GameRegistry.addRecipe(RingkyDinkRecipeHandler.assemble(d)); //ring assembly
             GameRegistry.addRecipe(RingkyDinkRecipeHandler.disassemble(d)); //ring disassembly
-            //GameRegistry.addShapelessRecipe(DinkNBT.getRingkyDinkOfType(d),DinkNBT.getDinkOfType(d),DinkNBT.getRingForDink(d)); //todo: doesnt return correct ringkydink
-            //GameRegistry.addShapelessRecipe(DinkNBT.getDinkOfType(d),DinkNBT.getRingkyDinkOfType(d)); //todo: doesnt return correct dink
         }
     }
 }
