@@ -13,7 +13,7 @@ public class DinkAbilityFlight extends IDinkAbility {
     public boolean constantItemConsumption () {return true;}
     public boolean consumesItems () {return true;}
     public void enable (EntityPlayer player, ItemStack stack) {
-        if (!player.capabilities.allowFlying && player.capabilities.isCreativeMode) {
+        if (!player.capabilities.allowFlying && !player.capabilities.isCreativeMode) {
             player.capabilities.allowFlying = true;
             player.sendPlayerAbilities();
         }
