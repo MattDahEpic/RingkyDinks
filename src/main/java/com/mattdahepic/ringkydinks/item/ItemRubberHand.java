@@ -24,4 +24,11 @@ public class ItemRubberHand extends Item {
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
         //TODO: tick all items in the pack
     }
+    @Override
+    public ItemStack onItemRightClick(ItemStack stack, World worldIn, EntityPlayer player) {
+        if (player.isSneaking()) {
+            //player.displayGui();
+        }
+        return stack;
+    }
 }
