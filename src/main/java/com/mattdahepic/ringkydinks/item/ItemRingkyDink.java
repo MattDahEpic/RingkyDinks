@@ -2,6 +2,7 @@ package com.mattdahepic.ringkydinks.item;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
+import com.mattdahepic.mdecore.helpers.TranslationHelper;
 import com.mattdahepic.ringkydinks.RingkyDinks;
 import com.mattdahepic.ringkydinks.dink.DinkNBT;
 import com.mattdahepic.ringkydinks.dink.EnumDink;
@@ -34,9 +35,10 @@ public class ItemRingkyDink extends Item implements IBauble {
     public ItemStack getContainerItem (ItemStack stack) {
         return DinkNBT.getRingForDink(DinkNBT.getDinkType(stack));
     }
-    public String getUnlocalizedName (ItemStack stack) {
-        return "item.ringkydink."+ DinkNBT.getDinkType(stack);
+    public String getItemStackDisplayName(ItemStack stack) {
+        return TranslationHelper.getTranslatedString(DinkNBT.getNiceDinkNameForTooltip(DinkNBT.getDinkType(stack)))+TranslationHelper.getTranslatedString("item.ringkydink.suffix");
     }
+
     @Override
     public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems) {
         for (EnumDink d : EnumDink.values()) {

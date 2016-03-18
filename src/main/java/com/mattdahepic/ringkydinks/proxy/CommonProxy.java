@@ -4,14 +4,19 @@ import com.mattdahepic.ringkydinks.RingkyDinks;
 import com.mattdahepic.ringkydinks.dink.DinkNBT;
 import com.mattdahepic.ringkydinks.dink.EnumDink;
 import com.mattdahepic.ringkydinks.item.recipe.RingkyDinkRecipeHandler;
+//import com.mattdahepic.ringkydinks.item.ui.RDGUIHandler;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class CommonProxy {
     public void registerTextures () {}
+    public void registerUIs () {
+        //NetworkRegistry.INSTANCE.registerGuiHandler(RingkyDinks.instance,new RDGUIHandler()); //TODO: renable
+    }
     public void registerItems () {
         GameRegistry.registerItem(RingkyDinks.ring,"ring");
         GameRegistry.registerItem(RingkyDinks.rubber_hand,"rubber_hand");
@@ -41,11 +46,11 @@ public class CommonProxy {
         GameRegistry.addShapedRecipe(DinkNBT.getDinkOfType(EnumDink.ENDERCHEST),"ece","ptp","epe",'e',Items.ender_eye,'p',Items.ender_pearl,'c',Blocks.ender_chest,'t',dinkTemplate);
         GameRegistry.addShapedRecipe(DinkNBT.getDinkOfType(EnumDink.CRAFTINGTABLE),"cpc","ptp","cpc",'c',Blocks.crafting_table,'p',Items.ender_pearl,'t',dinkTemplate);
         GameRegistry.addShapedRecipe(DinkNBT.getDinkOfType(EnumDink.MOBDERPEARL),"epe","ptp","epe",'e',Items.ender_eye,'p',Items.ender_pearl,'t',dinkTemplate);
-        GameRegistry.addRecipe(new ShapedOreRecipe(DinkNBT.getDinkOfType(EnumDink.UPHILLSTEPASSIST), "sls", "ltl", "sls", 's', "stairWood", 'l', "slabWood", 't', dinkTemplate));
+        GameRegistry.addRecipe(new ShapedOreRecipe(DinkNBT.getDinkOfType(EnumDink.UPHILLSTEPASSIST), "sls", "ltl", "sls", 's', "stair", 'l', "slab", 't', dinkTemplate));
         GameRegistry.addShapedRecipe(DinkNBT.getDinkOfType(EnumDink.REGENERATION),"gpg","ptp","gpg",'g',Items.ghast_tear,'p',new ItemStack(Items.potionitem,1,8225),'t',dinkTemplate);
         //ringkydinks
         for (EnumDink d : EnumDink.values()) {
-            if (d.ring == null) continue; //ignore template, cause it an independent dink who dont need no ring
+            if (d.ability == null) continue; //ignore template, cause it an independent dink who dont need no ring
             GameRegistry.addRecipe(RingkyDinkRecipeHandler.assemble(d)); //ring assembly
             GameRegistry.addRecipe(RingkyDinkRecipeHandler.disassemble(d)); //ring disassembly
         }

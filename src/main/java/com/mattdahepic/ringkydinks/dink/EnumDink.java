@@ -19,7 +19,8 @@ public enum EnumDink {
     CRAFTINGTABLE(EnumRing.TIER1,new DinkAbilityCraftingTable()),
     MOBDERPEARL(EnumRing.TIER2,new DinkAbilityMobderpearl()),
     UPHILLSTEPASSIST(EnumRing.TIER2,new DinkAbilityUphillStepAssist()),
-    REGENERATION(EnumRing.TIER3,new DinkAbilityRegeneration());
+    REGENERATION(EnumRing.TIER3,new DinkAbilityRegeneration()),
+    EPICBATTLEMUSIC(EnumRing.TIER2,new DinkAbilityEpicBattleMusic());
 
     public final EnumRing ring;
     public final IDinkAbility ability;

@@ -22,7 +22,6 @@ public class RDConfig extends ConfigSyncable {
     @Config(CAT_CONSUMEAMOUNT) @Comment({"How many items should the night vision ring consume every consumption interval?","Set to 0 to disable."}) @Range(min = 0,max = 64) public static int nightvisionConsumeAmount = 1;
     @Config(CAT_CONSUMEAMOUNT) @Comment({"How many food items should the saturation ring consume every consumption interval?","Set to 0 to disable."}) @Range(min = 0,max = 64) public static int saturationConsumeAmount = 1;
     @Config(CAT_CONSUMEAMOUNT) @Comment({"How many items should the speed ring consume every consumption interval?","Set to 0 to disable."}) @Range(min = 0,max = 64) public static int speedConsumeAmount = 1;
-    //TODO: CHEST
     @Config(CAT_CONSUMEAMOUNT) @Comment({"How many items should the mobderpearl consume when it grabs a mob?","Set to 0 to disable."}) @Range(min = 0,max = 64) public static int mobderpearlConsumeAmount = 1;
     @Config(CAT_CONSUMEAMOUNT) @Comment({"How many items should the regeneration ring consume every consumption interval?","Set to 0 to disable."}) @Range(min = 0,max = 64) public static int regenerationConsumeAmount = 1;
 
@@ -35,7 +34,6 @@ public class RDConfig extends ConfigSyncable {
     @Config(CAT_CONSUMEITEMS) @Comment({"What item should the water breathing ring consume?"}) public static String waterbreathingConsumeItem = "minecraft:fish@0";
     @Config(CAT_CONSUMEITEMS) @Comment({"What item should the night vision ring consume?"}) public static String nightvisionConsumeItem = "minecraft:torch@0";
     @Config(CAT_CONSUMEITEMS) @Comment({"What item should the speed ring consume?"}) public static String speedConusmeItem = "minecraft:sugar@0";
-    //TODO: CHEST
     @Config(CAT_CONSUMEITEMS) @Comment({"What item should the mobderpearl consume?"}) public static String mobderpearlConsumeItem = "minecraft:ender_pearl@0";
     @Config(CAT_CONSUMEITEMS) @Comment({"What item should the regeneration ring consume?"}) public static String regenerationConsumeItem = "minecraft:ghast_tear@0";
 

@@ -22,7 +22,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-@Mod(modid = RingkyDinks.MODID,name = RingkyDinks.NAME,version = RingkyDinks.VERSION,dependencies = RingkyDinks.DEPENDENCIES)
+@Mod(modid = RingkyDinks.MODID,name = RingkyDinks.NAME,version = RingkyDinks.VERSION,dependencies = RingkyDinks.DEPENDENCIES,updateJSON = RingkyDinks.UPDATE_JSON)
 public class RingkyDinks {
     @Mod.Instance(RingkyDinks.MODID)
     public static RingkyDinks instance;
@@ -30,8 +30,8 @@ public class RingkyDinks {
     public static final String MODID = "ringkydinks";
     public static final String NAME = "Ringky Dinks";
     public static final String VERSION = "@VERSION@";
-    public static final String DEPENDENCIES = "required-after:mdecore@[1.8.9-1.1.1,);required-after:Baubles;";
-    public static final String UPDATE_URL = "https://raw.githubusercontent.com/MattDahEpic/Version/master/"+ MinecraftForge.MC_VERSION+"/"+MODID+".txt";
+    public static final String DEPENDENCIES = "required-after:mdecore@[1.8.9-1.1.1,);";
+    public static final String UPDATE_JSON = "https://raw.githubusercontent.com/MattDahEpic/Version/master/"+MODID+".json";
 
     public static CreativeTabs tab = new CreativeTabs(MODID) {
         @Override
@@ -58,15 +58,11 @@ public class RingkyDinks {
         RDNetworkHandler.initPackets();
         proxy.registerItems();
         proxy.registerTextures();
+        proxy.registerUIs();
     }
     @Mod.EventHandler
     public void init (FMLInitializationEvent e) {
         proxy.registerRecipes();
-        UpdateChecker.checkRemote(MODID, UPDATE_URL);
-    }
-    @SubscribeEvent
-    public void joinServer (PlayerEvent.PlayerLoggedInEvent e) {
-        UpdateChecker.printMessageToPlayer(MODID, e.player);
     }
     @SubscribeEvent
     public void tick (TickEvent.PlayerTickEvent e) {
