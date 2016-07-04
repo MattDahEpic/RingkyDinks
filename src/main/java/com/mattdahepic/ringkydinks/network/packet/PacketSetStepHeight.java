@@ -10,7 +10,9 @@ public class PacketSetStepHeight implements IMessageHandler<PacketSetStepHeight.
     @Override
     public IMessage onMessage (SetStepHeightMessage msg, MessageContext ctx) {
         if (ctx.side.isClient()) {
-            Minecraft.getMinecraft().thePlayer.stepHeight = msg.value;
+            if (Minecraft.getMinecraft().thePlayer != null) {
+                Minecraft.getMinecraft().thePlayer.stepHeight = msg.value;
+            }
         }
         return null;
     }

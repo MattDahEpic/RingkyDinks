@@ -1,7 +1,7 @@
 {
   "parent": "ringkydinks:builtin/generated",
   "textures": {
-    "layer0": "ringkydinks:items/rubber_hand"
+    "layer0": "ringkydinks:items/ringkydink_pouch"
   },
   "display": {
     "thirdperson": {

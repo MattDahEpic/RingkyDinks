@@ -1,20 +1,20 @@
 itemGroup.ringkydinks=Ringky Dinks
 
 item.ring.name=Ring
-item.rubber_hand.name=Rubber Hand [WIP]
+item.ringkydink_pouch.name=Ringkydink Pouch
 
 #Suffixes should contain a space before the suffix
 item.dink.suffix= Dink
-item.ringkydink.suffix= RingykDink
+item.ringkydink.suffix= RingkyDink
 
-ringkydink.hand.full=Contains Rings:
-ringkydink.hand.empty=Empty
+ringkydink.pouch.full=Contains Rings:
+ringkydink.pouch.empty=Empty
 
 #Dink Names
 ringkydink.name.template=Template
 ringkydink.name.flight=Flight
 ringkydink.name.lavawalk=Lava Walking
-ringkydink.name.waterwalk=Water Walking
+ringkydink.name.waterwalk=Water Walking [WILL BE REMOVED IN NEXT VERSION]
 ringkydink.name.antipotion=Anti-Potion
 ringkydink.name.extinguisher=Extinguisher
 ringkydink.name.magnet=Magnet
@@ -26,5 +26,5 @@ ringkydink.name.chest=Chest
 ringkydink.name.enderchest=Ender Chest
 ringkydink.name.craftingtable=Crafting Table
 ringkydink.name.mobderpearl=Mobderpearl
-ringkydink.name.uphillstepassist=Uphill Step Assist
+ringkydink.name.uphillstepassist=Uphill Step Assist [WILL BE REMOVED IN NEXT VERSION]
 ringkydink.name.regeneration=Regeneration

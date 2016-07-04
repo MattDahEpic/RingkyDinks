@@ -1,7 +1,7 @@
 package com.mattdahepic.ringkydinks.dink;
 
-import com.mattdahepic.mdecore.helpers.TranslationHelper;
 import com.mattdahepic.ringkydinks.RingkyDinks;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.Constants;
@@ -45,6 +45,7 @@ public class DinkNBT {
     }
 
     public static String getNiceDinkNameForTooltip (EnumDink dink) {
-        return TranslationHelper.getTranslatedString(NICE_NAME_TRANSLATION_KEY_PREFIX+dink.getType());
+        if (dink == null) return "null";
+        return I18n.format(NICE_NAME_TRANSLATION_KEY_PREFIX + dink.getType());
     }
 }

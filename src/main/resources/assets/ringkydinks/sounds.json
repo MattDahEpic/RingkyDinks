@@ -1,9 +1,0 @@
-{
-  "roller_mobster": {
-    "category": "player",
-    "stream": true,
-    "sounds": [
-      "ebm/roller_mobster"
-    ]
-  }
-}

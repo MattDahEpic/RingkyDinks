@@ -5,11 +5,15 @@ import com.mattdahepic.ringkydinks.config.RDConfig;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BossInfo;
+
+import java.lang.reflect.Field;
 
 public class DinkAbilityMobderpearl extends IDinkAbility {
     private static final String TAG_MOBDERPEARL_HAS_MOB = "dink.mobderpearl.hasmob";
@@ -27,26 +31,29 @@ public class DinkAbilityMobderpearl extends IDinkAbility {
         ret.stackSize = RDConfig.mobderpearlConsumeAmount;
         return ret;
     }
-    public void onClick (EntityPlayer player, ItemStack stack) {}
+    public void onClick (EntityPlayer p, ItemStack s,EnumHand h) {}
     public void tick (EntityPlayer player, ItemStack stack) {}
-    public boolean onEntityClick (EntityPlayer player, ItemStack stack, EntityLivingBase target) {
-        if (!getHasMob(stack)) {
+    public boolean onEntityClick (EntityPlayer player, ItemStack stack, EntityLivingBase target,EnumHand h) {
+        if (!getHasMob(stack) && h != EnumHand.OFF_HAND) {
             if (IDinkAbility.consumeRequiredItemForAbility(this,player,false)) {
                 return captureMob(player,stack,target);
             }
         }
         return false;
     }
-    public boolean onBlockClick (EntityPlayer player, ItemStack stack, BlockPos pos, EnumFacing side) {
-        return getHasMob(stack) && releaseMob(player, stack, pos, side);
+    public EnumActionResult onBlockClick (EntityPlayer player, ItemStack stack, BlockPos pos, EnumFacing side, EnumHand hand) {
+        if (hand == EnumHand.MAIN_HAND && releaseMob(player,stack,pos,side)) {
+            return EnumActionResult.SUCCESS;
+        }
+        return EnumActionResult.PASS;
     }
 
     private static boolean captureMob (EntityPlayer player, ItemStack stack, EntityLivingBase target) {
         if (!getHasMob(stack) && target instanceof EntityLiving && !player.worldObj.isRemote) { //is empty and an actual living thing and you're on the server
             if (((EntityLiving)target).getAttackTarget() != null) return false; //can't be targeting anything
-            if (target instanceof IBossDisplayData) return false; //can't be a boss
+            for (Field f : target.getClass().getFields()) { if (f.getType().isAssignableFrom(BossInfo.class)) return false; } //can't be a boss
             if (((EntityLiving)target).getMaxHealth() > player.getMaxHealth()) return false; //can't be stronger than the player
-                /* BEGIN MOB CAPTURE */
+            /* BEGIN MOB CAPTURE */
             stack.getTagCompound().setBoolean(TAG_MOBDERPEARL_HAS_MOB, true);
             stack.getTagCompound().setTag(TAG_MOBDERPEARL_MOB, target.serializeNBT());
             stack.getTagCompound().setString(TAG_MOBDERPREAL_MOB_NAME,target.hasCustomName() ? target.getCustomNameTag() : target.getName());

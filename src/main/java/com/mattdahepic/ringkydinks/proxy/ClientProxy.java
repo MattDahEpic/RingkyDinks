@@ -4,9 +4,9 @@ import com.mattdahepic.ringkydinks.RingkyDinks;
 import com.mattdahepic.ringkydinks.dink.DinkNBT;
 import com.mattdahepic.ringkydinks.dink.EnumDink;
 import net.minecraft.client.renderer.ItemMeshDefinition;
+import net.minecraft.client.renderer.block.model.ModelBakery;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.resources.model.ModelBakery;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -21,7 +21,7 @@ public class ClientProxy extends CommonProxy {
         ModelLoader.setCustomModelResourceLocation(RingkyDinks.ring, EnumDink.EnumRing.TIER2.meta,new ModelResourceLocation("ringkydinks:ring/ring2","inventory"));
         ModelLoader.setCustomModelResourceLocation(RingkyDinks.ring, EnumDink.EnumRing.TIER3.meta,new ModelResourceLocation("ringkydinks:ring/ring3","inventory"));
         //rubber hand
-        ModelLoader.setCustomModelResourceLocation(RingkyDinks.rubber_hand,0,new ModelResourceLocation("ringkydinks:rubber_hand","inventory"));
+        ModelLoader.setCustomModelResourceLocation(RingkyDinks.ringkydink_pouch,0,new ModelResourceLocation("ringkydinks:ringkydink_pouch","inventory"));
         //set up dink locations
         for (EnumDink d : EnumDink.values()) {
             ModelBakery.registerItemVariants(RingkyDinks.dink,new ModelResourceLocation("ringkydinks:dink/dink_"+d.getType(),"inventory")); //dink model

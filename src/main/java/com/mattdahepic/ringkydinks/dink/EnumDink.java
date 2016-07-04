@@ -19,8 +19,7 @@ public enum EnumDink {
     CRAFTINGTABLE(EnumRing.TIER1,new DinkAbilityCraftingTable()),
     MOBDERPEARL(EnumRing.TIER2,new DinkAbilityMobderpearl()),
     UPHILLSTEPASSIST(EnumRing.TIER2,new DinkAbilityUphillStepAssist()),
-    REGENERATION(EnumRing.TIER3,new DinkAbilityRegeneration()),
-    EPICBATTLEMUSIC(EnumRing.TIER2,new DinkAbilityEpicBattleMusic());
+    REGENERATION(EnumRing.TIER3,new DinkAbilityRegeneration());
 
     public final EnumRing ring;
     public final IDinkAbility ability;
@@ -36,14 +35,14 @@ public enum EnumDink {
     }
 
     public enum EnumRing {
-        TIER1(0),
-        TIER2(1),
-        TIER3(2);
+        TIER1,
+        TIER2,
+        TIER3;
 
         public final int meta;
 
-        EnumRing(int meta) {
-            this.meta = meta;
+        EnumRing() {
+            this.meta = ordinal();
         }
     }
 }

@@ -5,8 +5,10 @@ import com.mattdahepic.ringkydinks.config.RDConfig;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 
 public class DinkAbilityFlight extends IDinkAbility {
     public boolean hasUseAbility () {return false;}
@@ -30,8 +32,8 @@ public class DinkAbilityFlight extends IDinkAbility {
         ret.stackSize = RDConfig.flightConsumeAmount;
         return ret;
     }
-    public void onClick (EntityPlayer player, ItemStack stack) {}
-    public void tick (EntityPlayer player, ItemStack stack) {}
-    public boolean onBlockClick (EntityPlayer player, ItemStack stack, BlockPos pos, EnumFacing side) {return false;}
-    public boolean onEntityClick (EntityPlayer player, ItemStack stack, EntityLivingBase target) {return false;}
+    public void onClick (EntityPlayer p, ItemStack s, EnumHand h) {}
+    public void tick (EntityPlayer p, ItemStack s) {}
+    public EnumActionResult onBlockClick (EntityPlayer p, ItemStack s, BlockPos pos, EnumFacing side, EnumHand h) {return EnumActionResult.PASS;}
+    public boolean onEntityClick (EntityPlayer p, ItemStack s, EntityLivingBase t,EnumHand h) {return false;}
 }

@@ -1,26 +1,27 @@
 package com.mattdahepic.ringkydinks.item;
 
-import baubles.api.BaubleType;
-import baubles.api.IBauble;
-import com.mattdahepic.mdecore.helpers.TranslationHelper;
 import com.mattdahepic.ringkydinks.RingkyDinks;
 import com.mattdahepic.ringkydinks.dink.DinkNBT;
 import com.mattdahepic.ringkydinks.dink.EnumDink;
 import com.mattdahepic.ringkydinks.dink.ability.DinkAbilityMobderpearl;
 import com.mattdahepic.ringkydinks.dink.ability.IDinkAbility;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.List;
 
-public class ItemRingkyDink extends Item implements IBauble {
+public class ItemRingkyDink extends Item {
     public long lastUpdate = 0;
     public ItemRingkyDink () {
         this.setUnlocalizedName("ringkydink");
@@ -36,7 +37,7 @@ public class ItemRingkyDink extends Item implements IBauble {
         return DinkNBT.getRingForDink(DinkNBT.getDinkType(stack));
     }
     public String getItemStackDisplayName(ItemStack stack) {
-        return TranslationHelper.getTranslatedString(DinkNBT.getNiceDinkNameForTooltip(DinkNBT.getDinkType(stack)))+TranslationHelper.getTranslatedString("item.ringkydink.suffix");
+        return DinkNBT.getNiceDinkNameForTooltip(DinkNBT.getDinkType(stack))+I18n.format("item.ringkydink.suffix");
     }
 
     @Override
@@ -77,32 +78,15 @@ public class ItemRingkyDink extends Item implements IBauble {
         IDinkAbility.onUpdate(DinkNBT.getDinkType(stack).ability,(EntityPlayer)entity,stack);
     }
     @Override
-    public ItemStack onItemRightClick (ItemStack stack, World world, EntityPlayer player) {
-        return IDinkAbility.onItemRightClick(DinkNBT.getDinkType(stack).ability,player,stack);
+    public ActionResult<ItemStack> onItemRightClick (ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
+        return IDinkAbility.onItemRightClick(DinkNBT.getDinkType(stack).ability,player,stack,hand);
     }
     @Override
-    public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase target) {
-        return IDinkAbility.itemInteractionForEntity(DinkNBT.getDinkType(stack).ability,player,stack,target);
+    public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase target, EnumHand hand) {
+        return IDinkAbility.itemInteractionForEntity(DinkNBT.getDinkType(stack).ability,player,stack,target,hand);
     }
     @Override
-    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
-        return IDinkAbility.onItemUse(DinkNBT.getDinkType(stack).ability,player,stack,pos,side);
-    }
-
-    /* BAUBLES */
-    public BaubleType getBaubleType(ItemStack stack) {
-        return BaubleType.RING;
-    }
-    public void onWornTick(ItemStack stack, EntityLivingBase player) {
-        if (DinkNBT.getDinkType(stack) == null) return; //update safety
-        IDinkAbility.onUpdate(DinkNBT.getDinkType(stack).ability,(EntityPlayer)player,stack);
-    }
-    public void onEquipped(ItemStack stack, EntityLivingBase player) {}
-    public void onUnequipped(ItemStack stack, EntityLivingBase player) {}
-    public boolean canEquip(ItemStack stack, EntityLivingBase player) {
-        return true;
-    }
-    public boolean canUnequip(ItemStack stack, EntityLivingBase player) {
-        return true;
+    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand , EnumFacing side, float hitX, float hitY, float hitZ) {
+        return IDinkAbility.onItemUse(DinkNBT.getDinkType(stack).ability,player,stack,pos,side,hand);
     }
 }

@@ -1,11 +1,11 @@
-package com.mattdahepic.ringkydinks.item.container;
+/*package com.mattdahepic.ringkydinks.item.container;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 
-/*public class ContainerRubberHand extends Container {
+public class ContainerRubberHand extends Container {
     public ContainerRubberHand (InventoryPlayer player,) {
         //TODO
         addSlotToContainer(new Slot(inv,0,49,93)); //thumb
@@ -28,5 +28,4 @@ import net.minecraft.inventory.Slot;
             addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
         }
     }
-}
-*/
+}8=*/
