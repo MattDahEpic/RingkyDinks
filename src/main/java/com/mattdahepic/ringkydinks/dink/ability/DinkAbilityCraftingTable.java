@@ -23,7 +23,7 @@ public class DinkAbilityCraftingTable extends IDinkAbility {
         return null;
     }
     public void onClick (EntityPlayer player, ItemStack s, EnumHand h) {
-        player.displayGui(new DinkAbilityCraftingTable.InterfaceFakeCraftingTable(player.worldObj));
+        player.displayGui(new DinkAbilityCraftingTable.InterfaceFakeCraftingTable(player.world));
     }
     public void tick (EntityPlayer player, ItemStack stack) {}
     public EnumActionResult onBlockClick (EntityPlayer p, ItemStack s, BlockPos pos, EnumFacing side, EnumHand h) {return EnumActionResult.PASS;}

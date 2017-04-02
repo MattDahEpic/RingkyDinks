@@ -26,7 +26,7 @@ public class DinkAbilitySaturation extends IDinkAbility {
     public ItemStack getConsumeItem (ItemStack item) {
         if (item.getItem() instanceof ItemFood) {
             ItemStack ret = item.copy();
-            ret.stackSize = RDConfig.saturationConsumeAmount;
+            ret.setCount(RDConfig.saturationConsumeAmount);
             return ret;
         }
         return new ItemStack(Blocks.AIR);

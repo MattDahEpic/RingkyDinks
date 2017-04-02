@@ -6,7 +6,6 @@ public enum EnumDink {
     TEMPLATE(null,null),
     FLIGHT(EnumRing.TIER3,new DinkAbilityFlight()),
     LAVAWALK(EnumRing.TIER1,new DinkAbilityLavaWalk()),
-    WATERWALK(EnumRing.TIER1,new DinkAbilityWaterWalk()),
     ANTIPOTION(EnumRing.TIER2,new DinkAbilityAntiPotion()),
     EXTINGUISHER(EnumRing.TIER2,new DinkAbilityExtinguisher()),
     MAGNET(EnumRing.TIER2,new DinkAbilityMagnet()),

@@ -20,7 +20,7 @@ public class DinkAbilityMagnet extends IDinkAbility { //Thanks EnderIO
     public boolean consumesItems () {return true;}
     public void tick (EntityPlayer player, ItemStack stack) {
         if (!player.isSneaking() && !player.isSpectator()) {
-            List<EntityItem> inArea = player.worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(player.posX - 6D, player.posY - 4D, player.posZ - 6D, player.posX + 6D, player.posY + 4D, player.posZ + 6D));
+            List<EntityItem> inArea = player.world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(player.posX - 6D, player.posY - 4D, player.posZ - 6D, player.posX + 6D, player.posY + 4D, player.posZ + 6D));
             for (EntityItem i : inArea) {
                 double x = player.posX + 0.5D - i.posX;
                 double y = player.posY + 1D - i.posY;
@@ -44,7 +44,7 @@ public class DinkAbilityMagnet extends IDinkAbility { //Thanks EnderIO
     public ItemStack getConsumeItem (ItemStack i) {
         String name = RDConfig.magnetConsumeItem;
         ItemStack ret = ItemHelper.getItemFromName(name.substring(0, name.indexOf('@')), Integer.parseInt(name.substring(name.indexOf('@') + 1)));
-        ret.stackSize = RDConfig.magnetConsumeAmount;
+        ret.setCount(RDConfig.magnetConsumeAmount);
         return ret;
     }
     public void enable (EntityPlayer p, ItemStack s) {}

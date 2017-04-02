@@ -29,7 +29,7 @@ public class DinkAbilityFlight extends IDinkAbility {
     public ItemStack getConsumeItem (ItemStack i) {
         String name = RDConfig.flightConsumeItem;
         ItemStack ret = ItemHelper.getItemFromName(name.substring(0, name.indexOf('@')), Integer.parseInt(name.substring(name.indexOf('@')+1)));
-        ret.stackSize = RDConfig.flightConsumeAmount;
+        ret.setCount(RDConfig.flightConsumeAmount);
         return ret;
     }
     public void onClick (EntityPlayer p, ItemStack s, EnumHand h) {}

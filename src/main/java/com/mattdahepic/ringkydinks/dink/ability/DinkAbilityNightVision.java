@@ -25,7 +25,7 @@ public class DinkAbilityNightVision extends IDinkAbility {
     public ItemStack getConsumeItem (ItemStack i) {
         String name = RDConfig.nightvisionConsumeItem;
         ItemStack ret = ItemHelper.getItemFromName(name.substring(0, name.indexOf('@')), Integer.parseInt(name.substring(name.indexOf('@') + 1)));
-        ret.stackSize = RDConfig.nightvisionConsumeAmount;
+        ret.setCount(RDConfig.nightvisionConsumeAmount);
         return ret;
     }
     public void enable (EntityPlayer player, ItemStack stack) {}

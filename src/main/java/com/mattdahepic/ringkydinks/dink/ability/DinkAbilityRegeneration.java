@@ -25,7 +25,7 @@ public class DinkAbilityRegeneration extends IDinkAbility {
     public ItemStack getConsumeItem (ItemStack i) {
         String name = RDConfig.regenerationConsumeItem;
         ItemStack ret = ItemHelper.getItemFromName(name.substring(0, name.indexOf('@')), Integer.parseInt(name.substring(name.indexOf('@') + 1)));
-        ret.stackSize = RDConfig.regenerationConsumeAmount;
+        ret.setCount(RDConfig.regenerationConsumeAmount);
         return ret;
     }
     public void enable (EntityPlayer p, ItemStack s) {}

@@ -26,14 +26,13 @@ public class CommonProxy {
         GameRegistry.addRecipe(new ShapedOreRecipe(DinkNBT.getRingOfLevel(EnumDink.EnumRing.TIER1),"ggg","g g","ggg",'g',"nuggetGold"));
         GameRegistry.addShapelessRecipe(DinkNBT.getRingOfLevel(EnumDink.EnumRing.TIER2), new ItemStack(RingkyDinks.ring, 1, 0), Items.DIAMOND);
         GameRegistry.addShapelessRecipe(DinkNBT.getRingOfLevel(EnumDink.EnumRing.TIER3),new ItemStack(RingkyDinks.ring,1,1),Items.NETHER_STAR);
-        //rubber hand
+        //pouch
         GameRegistry.addShapedRecipe(new ItemStack(RingkyDinks.ringkydink_pouch,1,0),"ses","ece","ses",'s',Items.STICK,'e',Items.ENDER_PEARL,'c',Blocks.CHEST);
         //dinks
         ItemStack dinkTemplate = DinkNBT.getDinkOfType(EnumDink.TEMPLATE);
         GameRegistry.addRecipe(new ShapedOreRecipe(dinkTemplate,"sss","sds","sss",'s',Items.STICK,'d',"gemDiamond"));
         GameRegistry.addShapedRecipe(DinkNBT.getDinkOfType(EnumDink.FLIGHT),"fgf","gtg","fgf",'f',Items.FEATHER,'g',Blocks.GLASS,'t',dinkTemplate);
         GameRegistry.addRecipe(new ShapedOreRecipe(DinkNBT.getDinkOfType(EnumDink.LAVAWALK),"lsl","sts","lsl",'l',Items.LAVA_BUCKET,'s',"stone",'t',dinkTemplate));
-        GameRegistry.addShapedRecipe(DinkNBT.getDinkOfType(EnumDink.WATERWALK),"wiw","iti","wiw",'w',Items.WATER_BUCKET,'i',Blocks.ICE,'t',dinkTemplate);
         GameRegistry.addShapedRecipe(DinkNBT.getDinkOfType(EnumDink.ANTIPOTION),"mpm","ptp","mpm",'m',Items.MILK_BUCKET,'p',new ItemStack(Items.POTIONITEM,1,16),'t',dinkTemplate);
         GameRegistry.addShapedRecipe(DinkNBT.getDinkOfType(EnumDink.EXTINGUISHER),"wbw","btb","wbw",'w',Blocks.WOOL,'b',Items.WATER_BUCKET,'t',dinkTemplate);
         GameRegistry.addRecipe(new ShapedOreRecipe(DinkNBT.getDinkOfType(EnumDink.MAGNET),"ioi","oto","ioi",'i',"ingotIron",'o',Blocks.OBSIDIAN,'t',dinkTemplate));

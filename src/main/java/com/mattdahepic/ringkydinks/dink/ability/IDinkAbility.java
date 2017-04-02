@@ -30,7 +30,7 @@ public abstract class IDinkAbility {
 
     /* CONSUME METHODS */
     public static void onUpdate (IDinkAbility ability, EntityPlayer player, ItemStack stack) {
-        if (!player.worldObj.isRemote) {
+        if (!player.world.isRemote) {
             if (DinkNBT.getEnabled(stack)) {
                 if (consumeRequiredItemForAbility(ability, player, true)) {
                     DinkNBT.setEnabled(stack, true);
@@ -47,7 +47,7 @@ public abstract class IDinkAbility {
         }
     }
     public static ActionResult<ItemStack> onItemRightClick (IDinkAbility ability, EntityPlayer player, ItemStack stack, EnumHand hand) {
-        if (!player.worldObj.isRemote) {
+        if (!player.world.isRemote) {
             if (!ability.hasUseAbility()) {
                 if (player.isSneaking()) {
                     DinkNBT.setEnabled(stack, !DinkNBT.getEnabled(stack)); //reverse enabled value
@@ -68,8 +68,8 @@ public abstract class IDinkAbility {
         return ability.onBlockClick(player,stack,pos,side,hand);
     }
     static boolean consumeRequiredItemForAbility (IDinkAbility ability, EntityPlayer player, boolean isConstant) {
-        if (RDConfig.consumeItems && ability.consumesItems() && !player.worldObj.isRemote) { //if item consumption enabled, the ring consumes items, and on server
-            if (isConstant && ability.constantItemConsumption() && player.worldObj.getTotalWorldTime() % RDConfig.consumeInterval == 0) {
+        if (RDConfig.consumeItems && ability.consumesItems() && !player.world.isRemote) { //if item consumption enabled, the ring consumes items, and on server
+            if (isConstant && ability.constantItemConsumption() && player.world.getTotalWorldTime() % RDConfig.consumeInterval == 0) {
                 return doConsume(ability,player);
             } else if (!isConstant && !ability.constantItemConsumption()) {
                 return doConsume(ability,player);
@@ -81,10 +81,10 @@ public abstract class IDinkAbility {
         for (int index = 0; index < player.inventory.getSizeInventory(); index++) {
             ItemStack i = player.inventory.getStackInSlot(index);
             if (ItemHelper.isSameIgnoreStackSize(i,ability.getConsumeItem(i),false)) {
-                if (i.stackSize >= ability.getConsumeItem(i).stackSize) {
-                    i.stackSize -= ability.getConsumeItem(i).stackSize;
+                if (i.getCount() >= ability.getConsumeItem(i).getCount()) {
+                    i.setCount(i.getCount()-ability.getConsumeItem(i).getCount());
                     player.inventory.setInventorySlotContents(index,i);
-                    if (i.stackSize == 0) player.inventory.setInventorySlotContents(index, null); //prevent 0 item stacks
+                    if (i.getCount() == 0) player.inventory.setInventorySlotContents(index, ItemStack.EMPTY); //prevent 0 item stacks
                     if (i.getItem().hasContainerItem(i)) {
                         player.inventory.addItemStackToInventory(i.getItem().getContainerItem(i)); //add back buckets for liquids and bowls for mush-stew
                     }
@@ -92,7 +92,7 @@ public abstract class IDinkAbility {
                 }
             }
         }
-        player.addChatMessage(new TextComponentString(TextFormatting.DARK_RED + "Not enough items to fuel a ring, it has been disabled."));
+        player.sendMessage(new TextComponentString(TextFormatting.DARK_RED + "Not enough items to fuel a ring, it has been disabled."));
         return false;
     }
 }

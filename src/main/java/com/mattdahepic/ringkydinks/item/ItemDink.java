@@ -7,8 +7,9 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-
-import java.util.List;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemDink extends Item {
     public ItemDink () {
@@ -21,7 +22,8 @@ public class ItemDink extends Item {
         return DinkNBT.getNiceDinkNameForTooltip(DinkNBT.getDinkType(stack))+I18n.format("item.dink.suffix");
     }
     @Override
-    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems) {
+    @SideOnly(Side.CLIENT)
+    public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> subItems) {
         for (EnumDink d : EnumDink.values()) {
             subItems.add(DinkNBT.getDinkOfType(d));
         }

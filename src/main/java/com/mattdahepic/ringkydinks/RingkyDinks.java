@@ -33,8 +33,8 @@ public class RingkyDinks {
 
     public static CreativeTabs tab = new CreativeTabs(MODID) {
         @Override
-        public Item getTabIconItem() {
-            return ringkydink;
+        public ItemStack getTabIconItem() {
+            return new ItemStack(ringkydink);
         }
         @Override
         public ItemStack getIconItemStack() {

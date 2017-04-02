@@ -16,16 +16,16 @@ public class DinkAbilityLavaWalk extends IDinkAbility {
     public boolean constantItemConsumption () {return false;}
     public boolean consumesItems () {return true;}
     public void tick (EntityPlayer player, ItemStack stack) {
-        if (player.worldObj.getBlockState(player.getPosition().down()).getBlock() == Blocks.LAVA || player.worldObj.getBlockState(player.getPosition().down()).getBlock() == Blocks.FLOWING_LAVA) {
+        if (player.world.getBlockState(player.getPosition().down()).getBlock() == Blocks.LAVA || player.world.getBlockState(player.getPosition().down()).getBlock() == Blocks.FLOWING_LAVA) {
             if (IDinkAbility.consumeRequiredItemForAbility(this,player,false)) {
-                player.worldObj.setBlockState(player.getPosition().down(), Blocks.STONE.getDefaultState());
+                player.world.setBlockState(player.getPosition().down(), Blocks.STONE.getDefaultState());
             }
         }
     }
     public ItemStack getConsumeItem (ItemStack i) {
         String name = RDConfig.lavawalkConsumeItem;
         ItemStack ret = ItemHelper.getItemFromName(name.substring(0, name.indexOf('@')), Integer.parseInt(name.substring(name.indexOf('@') + 1)));
-        ret.stackSize = RDConfig.lavawalkConsumeAmount;
+        ret.setCount(RDConfig.lavawalkConsumeAmount);
         return ret;
     }
     public void enable (EntityPlayer p, ItemStack s) {}

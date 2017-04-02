@@ -28,7 +28,7 @@ public class DinkAbilityMobderpearl extends IDinkAbility {
     public ItemStack getConsumeItem (ItemStack i) {
         String name = RDConfig.mobderpearlConsumeItem;
         ItemStack ret = ItemHelper.getItemFromName(name.substring(0, name.indexOf('@')), Integer.parseInt(name.substring(name.indexOf('@') + 1)));
-        ret.stackSize = RDConfig.mobderpearlConsumeAmount;
+        ret.setCount(RDConfig.mobderpearlConsumeAmount);
         return ret;
     }
     public void onClick (EntityPlayer p, ItemStack s,EnumHand h) {}
@@ -49,7 +49,7 @@ public class DinkAbilityMobderpearl extends IDinkAbility {
     }
 
     private static boolean captureMob (EntityPlayer player, ItemStack stack, EntityLivingBase target) {
-        if (!getHasMob(stack) && target instanceof EntityLiving && !player.worldObj.isRemote) { //is empty and an actual living thing and you're on the server
+        if (!getHasMob(stack) && target instanceof EntityLiving && !player.world.isRemote) { //is empty and an actual living thing and you're on the server
             if (((EntityLiving)target).getAttackTarget() != null) return false; //can't be targeting anything
             for (Field f : target.getClass().getFields()) { if (f.getType().isAssignableFrom(BossInfo.class)) return false; } //can't be a boss
             if (((EntityLiving)target).getMaxHealth() > player.getMaxHealth()) return false; //can't be stronger than the player
@@ -64,16 +64,16 @@ public class DinkAbilityMobderpearl extends IDinkAbility {
         return false;
     }
     private static boolean releaseMob (EntityPlayer player, ItemStack stack, BlockPos blockClicked, EnumFacing sideClicked) {
-        if (getHasMob(stack)  && !player.worldObj.isRemote) { //has mob to release and is on server
+        if (getHasMob(stack)  && !player.world.isRemote) { //has mob to release and is on server
             BlockPos releasePos = blockClicked.offset(sideClicked);
-            EntityLiving mob = (EntityLiving) EntityList.createEntityFromNBT(stack.getTagCompound().getCompoundTag(TAG_MOBDERPEARL_MOB), player.worldObj);
+            EntityLiving mob = (EntityLiving) EntityList.createEntityFromNBT(stack.getTagCompound().getCompoundTag(TAG_MOBDERPEARL_MOB), player.world);
             mob.setPosition(releasePos.getX()+0.5, releasePos.getY(), releasePos.getZ()+0.5);
             mob.motionX = 0f;
             mob.motionY = 0f;
             mob.motionZ = 0f;
             mob.fallDistance = 0f;
             mob.dimension = player.dimension;
-            player.worldObj.spawnEntityInWorld(mob);
+            player.world.spawnEntity(mob);
             stack.getTagCompound().setBoolean(TAG_MOBDERPEARL_HAS_MOB, false);
             stack.getTagCompound().removeTag(TAG_MOBDERPREAL_MOB_NAME);
             stack.getTagCompound().removeTag(TAG_MOBDERPEARL_MOB);

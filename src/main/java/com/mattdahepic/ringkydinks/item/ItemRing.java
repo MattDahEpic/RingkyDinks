@@ -6,6 +6,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -27,7 +30,8 @@ public class ItemRing extends Item {
         }
     }
     @Override
-    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems) {
+    @SideOnly(Side.CLIENT)
+    public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> subItems) {
         for (EnumDink.EnumRing l : EnumDink.EnumRing.values()) {
             subItems.add(new ItemStack(RingkyDinks.ring,1,l.meta));
         }
