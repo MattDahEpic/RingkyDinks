@@ -3,10 +3,6 @@ itemGroup.ringkydinks=Ringky Dinks
 item.ring.name=Ring
 item.ringkydink_pouch.name=Ringkydink Pouch
 
-#Suffixes should contain a space before the suffix
-item.dink.suffix= Dink
-item.ringkydink.suffix= RingkyDink
-
 ringkydink.pouch.full=Contains Rings:
 ringkydink.pouch.empty=Empty
 
@@ -26,5 +22,5 @@ ringkydink.name.chest=Chest
 ringkydink.name.enderchest=Ender Chest
 ringkydink.name.craftingtable=Crafting Table
 ringkydink.name.mobderpearl=Mobderpearl
-ringkydink.name.uphillstepassist=Uphill Step Assist [WILL BE REMOVED IN NEXT VERSION]
+ringkydink.name.uphillstepassist=Uphill Step Assist
 ringkydink.name.regeneration=Regeneration
