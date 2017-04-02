@@ -3,10 +3,6 @@ itemGroup.ringkydinks=Ringky Dinks
 item.ring.name=Ring
 item.ringkydink_pouch.name=Ringkydink Pouch
 
-#Suffixes should contain a space before the suffix
-item.dink.suffix= Dink
-item.ringkydink.suffix= RingkyDink
-
 ringkydink.pouch.full=Contains Rings:
 ringkydink.pouch.empty=Empty
 

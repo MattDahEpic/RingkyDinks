@@ -28,7 +28,7 @@ public class RingkyDinks {
     public static final String MODID = "ringkydinks";
     public static final String NAME = "Ringky Dinks";
     public static final String VERSION = "@VERSION@";
-    public static final String DEPENDENCIES = "required-after:mdecore@[1.10.2-1.0,);";
+    public static final String DEPENDENCIES = "required-after:mdecore@[1.11-1.0,);";
     public static final String UPDATE_JSON = "https://raw.githubusercontent.com/MattDahEpic/Version/master/"+MODID+".json";
 
     public static CreativeTabs tab = new CreativeTabs(MODID) {

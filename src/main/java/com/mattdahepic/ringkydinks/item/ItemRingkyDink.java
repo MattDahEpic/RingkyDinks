@@ -5,7 +5,6 @@ import com.mattdahepic.ringkydinks.dink.DinkNBT;
 import com.mattdahepic.ringkydinks.dink.EnumDink;
 import com.mattdahepic.ringkydinks.dink.ability.DinkAbilityMobderpearl;
 import com.mattdahepic.ringkydinks.dink.ability.IDinkAbility;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -36,7 +35,7 @@ public class ItemRingkyDink extends Item {
         return DinkNBT.getRingForDink(DinkNBT.getDinkType(stack));
     }
     public String getItemStackDisplayName(ItemStack stack) {
-        return DinkNBT.getNiceDinkNameForTooltip(DinkNBT.getDinkType(stack))+I18n.format("item.ringkydink.suffix");
+        return DinkNBT.getNiceDinkNameForTooltip(DinkNBT.getDinkType(stack))+" RingkyDink";
     }
 
     @Override
